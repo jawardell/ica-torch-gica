@@ -2,21 +2,17 @@ import json
 import sys
 
 """run_gift.py
-
 This module contains default parameters and functions for running
 gift via NiPype.
-
 Functions:
     gift_gica - run group independent component analysis
     gift_dfnc - run dynamic functional network connectivity
     gift_mancova - run mancova
-
 Todo:
     * Finishg Adding Mancova parameters
     * Merge any more shared parameters
     * Mancova docstring
     * Tests
-
 """
 import os
 
@@ -87,6 +83,16 @@ DEFAULT_GROUP_ICA_TYPE = "spatial"
 DEFAULT_WHICH_ANALYSIS = 1
 DEFAULT_MASK = None
 
+#Connectogram plot options
+DEFAULT_Network_summary_comp_network_names = {"SC": [1, 2, 3, 4, 5], "AUD": [6, 7], "SM": [8, 9, 10, 11, 12, 13, 14, 15, 16], "VIS": [17, 18, 19, 20, 21, 22, 23, 24, 25], "CC": [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42], "DMN": [43, 44, 45, 46, 47, 48, 49], "CR": [50, 51, 52, 53]}
+DEFAULT_Network_summary_conn_threshold = 0.0
+DEFAULT_Network_summary_threshold = 1
+
+#Temporal sort options
+DEFAULT_SPM_MAT_FILE_EXISTS= None
+DEFAULT_REGRESSORS_OF_INTEREST = None
+DEFAULT_SPM_MAT_FILE_NAME="SPM.mat"
+
 # dFNC DEFAULTS
 # populated into the dfnc_parameters dict
 DEFAULT_TC_DETREND = (3,)
@@ -130,12 +136,15 @@ def gift_gica(
     display_results=DEFAULT_DISPLAY_RESULTS,
     which_analysis=DEFAULT_WHICH_ANALYSIS,
     mask=DEFAULT_MASK,
-    comp_network_names=None,
+    NS_comp_network_names=DEFAULT_COMP_NETWORK_NAMES,
+    NS_conn_threshold=DEFAULT_Network_summary_conn_threshold,
+    NS_threshold=DEFAULT_Network_summary_threshold,
+    TS_SPM_mat_file_exists=DEFAULT_SPM_MAT_FILE_EXISTS,
+    TS_regressors_of_interest=DEFAULT_REGRESSORS_OF_INTEREST,
     **kwargs
 ):
     """
     Wrapper for initializing GIFT nipype interface to run Group ICA.
-
     Args:
         in_files            (List [Str])    :   Input file names (either single file name or a list)
         dim                 (Int)           :   Dimensionality reduction into #num dimensions
@@ -152,23 +161,19 @@ def gift_gica(
         display_results     (Int)           :   0 - No display, 1 - HTML report, 2 - PDF
         which_analysis      (Int)           :   Options are 1, 2, and 3. 1 - standard group ica, 2 - ICASSO and 3 - MST.
         mask                (Str)           :   Enter file names using full path of the mask. If you wish to use default mask leave it empty
-
         algoType full options:
         1           2           3       4           5       6
         'Infomax'   'Fast ICA'  'Erica' 'Simbec'    'Evd'   'Jade Opac',
-        7           8           9                   10 
-        'Amuse'     'SDD ICA'   'Semi-blind'        'Constrained ICA (Spatial)' 
+        7           8           9                   10
+        'Amuse'     'SDD ICA'   'Semi-blind'        'Constrained ICA (Spatial)'
         11              12      13          14      15          16          17
         'Radical ICA'   'Combi' 'ICA-EBM'   'ERBM'  'IVA-GL'    'GIG-ICA'   'IVA-L'
-
     Args (not supported here, but available for nipype):
         perfType            (Int)           :   Options are 1, 2, and 3. 1 - maximize performance, 2 - less memory usage  and 3 - user specified settings.
         prefix              (Str)           :   Enter prefix to be appended with the output files
         dummy_scans         (Int)           :   enter dummy scans
-        numWorkers          (Int)           :   Number of parallel workers    
-        doEstimation        (Int)           :   options are 0 and 1 
-
-
+        numWorkers          (Int)           :   Number of parallel workers
+        doEstimation        (Int)           :   options are 0 and 1
     """
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
@@ -189,8 +194,23 @@ def gift_gica(
     gc.inputs.display_results = display_results
     if mask is not None:
         gc.inputs.mask = mask
-    if comp_network_names is not None:
-        gc.inputs.network_summary_opts = {"comp_network_names": comp_network_names}
+
+    # if comp_network_names is not None:
+    #     gc.inputs.network_summary_opts = {"comp_network_names": comp_network_names}
+    gc.inputs.network_summary_opts={"comp_network_names": NS_comp_network_names,'conn_threshold':NS_conn_threshold,'threshold':NS_threshold}
+
+    # Get temportal sorting options from params.json
+    stats_folder = '/'.join(str(in_files[0]).split('/')[:-2])+'/stats/'
+
+    if TS_SPM_mat_file_exists and os.path.exists(os.path.join(stats_folder,DEFAULT_SPM_MAT_FILE_NAME)):
+        designMatrix_list=[]
+        designMatrix_list.append(os.path.join(stats_folder, DEFAULT_SPM_MAT_FILE_NAME))
+        gc.inputs.designMatrix=designMatrix_list
+    if  TS_regressors_of_interest is not None:
+        regressors_list=[]
+        regressors_list.append(TS_regressors_of_interest)
+        gc.inputs.regressors = regressors_list
+
     if dim > 0:
         gc.inputs.dim = dim
 
@@ -203,7 +223,6 @@ def resolve_comp_network_names(num_comps, network_names):
     """
         Resolve the DEFAULT network names, so that the number of components in that dict does
         not exceed the desired num_comps. This is required for dFNC input.
-
         Currently just use the network numbers.
     """
     return {"%d" % v: v + 1 for v in range(num_comps)}
@@ -236,7 +255,6 @@ def gift_dfnc(
 ):
     """
     Wrapper for initializing GIFT nipype interface to run dynamic FNC.
-
     Args:
         ica_param_file      (Str)   :   Enter fullfile path of the ICA parameter file
         out_dir             (Str)   :   Enter fullfile path of the results directory
@@ -259,9 +277,8 @@ def gift_dfnc(
         kmeans_max_iter     (Int)   :   Maximum number of KMeans iterations
         dmethod             (Str)   :   Distance Method ('city', 'sqEuclid',...)
         display_results     (Int)   :   0 - No display, 1 - HTML report, 2 - PDF
-
     Args (not supported here, but available for nipype):
-        Regularisation      (Str)   :   Options are 'none' and 'L1'. 
+        Regularisation      (Str)   :   Options are 'none' and 'L1'.
     """
     out_dir = os.path.join(out_dir, run_name)
 
