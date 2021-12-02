@@ -139,6 +139,7 @@ def gift_gica(
     NS_comp_network_names=DEFAULT_COMP_NETWORK_NAMES,
     NS_conn_threshold=DEFAULT_Network_summary_conn_threshold,
     NS_threshold=DEFAULT_Network_summary_threshold,
+    TS_SPM_mat_file_path='',
     TS_SPM_mat_file_exists=DEFAULT_SPM_MAT_FILE_EXISTS,
     TS_regressors_of_interest=DEFAULT_REGRESSORS_OF_INTEREST,
     **kwargs
@@ -206,9 +207,12 @@ def gift_gica(
         designMatrix_list=[]
         designMatrix_list.append(os.path.join(stats_folder, DEFAULT_SPM_MAT_FILE_NAME))
         gc.inputs.designMatrix=designMatrix_list
+    if os.path.exists(TS_SPM_mat_file_path):
+        designMatrix_list=[]
+        designMatrix_list.append(TS_SPM_mat_file_path)
+        gc.inputs.designMatrix=designMatrix_list
     if  TS_regressors_of_interest is not None:
-        regressors_list=[]
-        regressors_list.append(TS_regressors_of_interest)
+        regressors_list=(str(TS_regressors_of_interest)).split(",")
         gc.inputs.regressors = regressors_list
 
     if dim > 0:
