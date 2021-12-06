@@ -136,7 +136,7 @@ def gift_gica(
     display_results=DEFAULT_DISPLAY_RESULTS,
     which_analysis=DEFAULT_WHICH_ANALYSIS,
     mask=DEFAULT_MASK,
-    NS_comp_network_names=DEFAULT_COMP_NETWORK_NAMES,
+    NS_comp_network_names=DEFAULT_Network_summary_comp_network_names,
     NS_conn_threshold=DEFAULT_Network_summary_conn_threshold,
     NS_threshold=DEFAULT_Network_summary_threshold,
     TS_SPM_mat_file_path='',
