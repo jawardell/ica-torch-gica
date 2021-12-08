@@ -345,7 +345,9 @@ def gift_mancova(
     gift.MancovanCommand.set_mlab_paths(matlab_cmd=matlab_cmd, use_mcr=True)
 
     gc = gift.MancovanCommand()
-    gc.inputs.ica_param_file = list(ica_param_file)
+    gc_ica_param_file=list()
+    gc_ica_param_file.append(ica_param_file)
+    gc.inputs.ica_param_file = gc_ica_param_file
     gc.inputs.out_dir = out_dir
     gc.inputs.comp_network_names = comp_network_names
     gc.inputs.TR = TR
