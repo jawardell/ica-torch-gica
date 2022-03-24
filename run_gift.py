@@ -142,6 +142,7 @@ def gift_gica(
     TS_SPM_mat_file_path='',
     TS_SPM_mat_file_exists=DEFAULT_SPM_MAT_FILE_EXISTS,
     TS_regressors_of_interest=DEFAULT_REGRESSORS_OF_INTEREST,
+    TR=DEFAULT_TR,
     **kwargs
 ):
     """
@@ -193,6 +194,7 @@ def gift_gica(
     gc.inputs.which_analysis = which_analysis
     gc.inputs.refFiles = get_interpolated_nifti(in_files[0], refFiles, out_dir)
     gc.inputs.display_results = display_results
+    gc.inputs.TR = TR
     if mask is not None:
         gc.inputs.mask = mask
 
