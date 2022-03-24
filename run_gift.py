@@ -194,6 +194,8 @@ def gift_gica(
     gc.inputs.which_analysis = which_analysis
     gc.inputs.refFiles = get_interpolated_nifti(in_files[0], refFiles, out_dir)
     gc.inputs.display_results = display_results
+    if type(TR) is not list:
+        TR = [TR]
     gc.inputs.TR = TR
     if mask is not None:
         gc.inputs.mask = mask
