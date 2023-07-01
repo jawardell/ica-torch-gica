@@ -1,0 +1,62 @@
+import-im6.q16: unable to open X server `' @ error/import.c/ImportImageCommand/360.
+import-im6.q16: unable to open X server `' @ error/import.c/ImportImageCommand/360.
+/app/run_gift.py: 16: /app/run_gift.py: run_gift.py
+This module contains default parameters and functions for running
+gift via NiPype.
+Functions:
+    gift_gica - run group independent component analysis
+    gift_dfnc - run dynamic functional network connectivity
+    gift_mancova - run mancova
+Todo:
+    * Finishg Adding Mancova parameters
+    * Merge any more shared parameters
+    * Mancova docstring
+    * Tests
+: File name too long
+import-im6.q16: unable to open X server `' @ error/import.c/ImportImageCommand/360.
+import-im6.q16: unable to open X server `' @ error/import.c/ImportImageCommand/360.
+/app/run_gift.py: 21: /app/run_gift.py: from: not found
+import-im6.q16: unable to open X server `' @ error/import.c/ImportImageCommand/360.
+/app/run_gift.py: 23: /app/run_gift.py: from: not found
+/app/run_gift.py: 24: /app/run_gift.py: from: not found
+import-im6.q16: unable to open X server `' @ error/import.c/ImportImageCommand/360.
+/app/run_gift.py: 30: /app/run_gift.py: ICA_TYPES: not found
+/app/run_gift.py: 31: /app/run_gift.py: PCA_TYPES: not found
+/app/run_gift.py: 32: /app/run_gift.py: BACK_RECON: not found
+/app/run_gift.py: 33: /app/run_gift.py: PREPROC_TYPES: not found
+/app/run_gift.py: 34: /app/run_gift.py: remove mean per timepoint,: not found
+/app/run_gift.py: 35: /app/run_gift.py: remove mean per voxel,: not found
+/app/run_gift.py: 36: /app/run_gift.py: intensity normalization,: not found
+/app/run_gift.py: 37: /app/run_gift.py: variance normalization,: not found
+/app/run_gift.py: 38: /app/run_gift.py: ]: not found
+/app/run_gift.py: 39: /app/run_gift.py: SCALE_TYPE: not found
+/app/run_gift.py: 40: /app/run_gift.py: WHICH_ANALYSIS: not found
+/app/run_gift.py: 41: /app/run_gift.py: ICA_ALGORITHMS: not found
+/app/run_gift.py: 42: /app/run_gift.py: InfoMax,: not found
+/app/run_gift.py: 43: /app/run_gift.py: Fast ICA,: not found
+/app/run_gift.py: 44: /app/run_gift.py: Erica,: not found
+/app/run_gift.py: 45: /app/run_gift.py: Simbec,: not found
+/app/run_gift.py: 46: /app/run_gift.py: Evd,: not found
+/app/run_gift.py: 47: /app/run_gift.py: Jade Opac,: not found
+/app/run_gift.py: 48: /app/run_gift.py: Amuse,: not found
+/app/run_gift.py: 49: /app/run_gift.py: SDD ICA,: not found
+/app/run_gift.py: 50: /app/run_gift.py: Semi-blind Infomax,: not found
+/app/run_gift.py: 51: /app/run_gift.py: Constrained ICA (Spatial),: not found
+/app/run_gift.py: 52: /app/run_gift.py: Radical ICA,: not found
+/app/run_gift.py: 53: /app/run_gift.py: Combi,: not found
+/app/run_gift.py: 54: /app/run_gift.py: ICA-EBM,: not found
+/app/run_gift.py: 55: /app/run_gift.py: ERBM,: not found
+/app/run_gift.py: 56: /app/run_gift.py: IVA-GL,: not found
+/app/run_gift.py: 57: /app/run_gift.py: GIG-ICA,: not found
+/app/run_gift.py: 58: /app/run_gift.py: IVA-L,: not found
+/app/run_gift.py: 59: /app/run_gift.py: ]: not found
+/app/run_gift.py: 63: /app/run_gift.py: matlab_cmd: not found
+/app/run_gift.py: 65: /app/run_gift.py: DEFAULT_OUT_DIR: not found
+/app/run_gift.py: 66: /app/run_gift.py: DEFAULT_DISPLAY_RESULTS: not found
+/app/run_gift.py: 67: /app/run_gift.py: DEFAULT_NUM_COMPS: not found
+/app/run_gift.py: 68: /app/run_gift.py: DEFAULT_COMP_NETWORK_NAMES: not found
+/app/run_gift.py: 69: /app/run_gift.py: DEFAULT_TR: not found
+/app/run_gift.py: 72: /app/run_gift.py: DEFAULT_DIM: not found
+/app/run_gift.py: 73: /app/run_gift.py: DEFAULT_ALG: not found
+/app/run_gift.py: 74: /app/run_gift.py: DEFAULT_ICA_PARAM_FILE: not found
+/app/run_gift.py: 75: /app/run_gift.py: Syntax error: "(" unexpected
