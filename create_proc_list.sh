@@ -1,19 +1,14 @@
-if [ -f $output_file ]; then 
-	rm $output_file
-else
-	touch $output_file
-fi
+#!/bin/bash
 
-# Loop through each subject directory
-while IFS= read -r subject_id; do
-  # Check if the subject directory exists
-  subject_dir="/data/users2/${GSU_ID}/nshor_docker/examples/${dataset}-project/${dataset_cp}/${subject_id}/ses_01/processed"
-  if [ -d "$subject_dir" ]; then
-    # Find the .nii.gz file within the subject directory
-    file_path=`ls $subject_dir | grep *.nii.gz`
-    
-    # Echo the file path to the output file
-    filename="rest_processed.nii.gz"
-    echo -n "/input/${subject_id}/ses_01/processed/$filename," >> "$output_file"
-  fi
-done < "$subjects_file"
+subs_file=/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/subjects.txt
+num_subs=$(wc -l < "$subs_file")
+
+IFS=$'\n' sub_ids=($(cat ${subs_file}))
+
+touch proc_fmri_datafiles.txt
+
+for(( i=0; i<$num_subs; i++))
+do
+	subjectID=${sub_ids[$i]}
+	echo -n "/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/${subjectID}/ses_01/processed/rest_processed.nii.gz," >> proc_fmri_datafiles.txt
+done
