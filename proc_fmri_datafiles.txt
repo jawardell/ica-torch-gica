@@ -1,1 +1,0 @@
-/data/users2/jwardell1/nshor_docker/examples/hcp-project/HCP/381038/processed/381038_rsfMRI_processed_rest.nii.gz
