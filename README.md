@@ -3,7 +3,7 @@
 This is part of the fMRI Preprocessing for Causal Modeling Project. 
 The goal of this is to perform the same task as 
 <a href="https://github.com/trendscenter/aa-gift">aa-gift</a> but without using GIFT 
-and using <a href="https://github.com/bbradt/ica-torch">ICA-Torch</a> instead.
+and using <a href="https://github.com/bbradt/ica_torch">ICA-Torch</a> instead.
 
 ## Container Files
 The `container_data` directory contains work toward using GIFT software to run ICA in a singularity container. 
