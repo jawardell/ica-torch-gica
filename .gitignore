@@ -2,3 +2,6 @@
 *.sif
 *.png
 *.nii.gz
+.vscode/
+*.swp
+*.swo

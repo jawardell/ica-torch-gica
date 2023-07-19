@@ -1,6 +1,6 @@
 # Group ICA Script in Python for Preprocessed Data
 
-## This is part of the fMRI Preprocessing for Causal Modeling Project
+This is part of the fMRI Preprocessing for Causal Modeling Project
 
 ## Container Files
 The `container_data` directory contains work toward using GIFT software to run ICA in a singularity container. 
