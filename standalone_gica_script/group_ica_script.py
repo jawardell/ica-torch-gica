@@ -140,7 +140,31 @@ def pca(X):
 	sorted_eigenvectors = eigenvectors[:, sorted_indices]
 	kl_tx_mat = np.column_stack(sorted_eigenvectors)
 	return kl_tx_mat @ zero_mean_mat
-	
+
+# This function performs PCA whitening on an input matrix X
+def pca_whitening(X):
+    # Step 1: Calculate the mean
+    mean = np.mean(X, axis=0)
+
+    # Step 2: Subtract the mean
+    zero_mean_mat = X - mean
+
+    # Step 3: Compute the covariance matrix
+    cov_mat = np.cov(zero_mean_mat.T)
+
+    # Step 4: Compute the eigenvectors and eigenvalues
+    eigenvalues, eigenvectors = np.linalg.eig(cov_mat)
+
+    # Step 5: Sort eigenvalues and eigenvectors
+    sorted_indices = np.argsort(eigenvalues)[::-1]
+    sorted_eigenvalues = eigenvalues[sorted_indices]
+    sorted_eigenvectors = eigenvectors[:, sorted_indices]
+
+    # Step 6: Whiten the data
+    epsilon = 1e-5  # Small constant to avoid division by zero
+    whitened_data = np.dot(zero_mean_mat, sorted_eigenvectors / np.sqrt(sorted_eigenvalues + epsilon))
+
+    return whitened_data
 
 
 ################################################################
