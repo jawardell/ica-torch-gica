@@ -7,7 +7,7 @@ import nibabel as nib
 # This script performs group ICA on a study's set of processed fMRI files
 def load_and_flatten_files():
     print("Read the file paths from proc_fmri_datafiles.txt")
-    with open('proc_fmri_datafiles.txt', 'r') as file:
+    with open('input_data/proc_fmri_datafiles.txt', 'r') as file:
         file_paths = file.read().split(',')
 
     print("Remove leading/trailing whitespace from file paths")
@@ -131,30 +131,112 @@ def compute_error_matrix(X,M):
 
 # This function performs PCA on the flattened data matrix X
 def pca(X):
+    # compute the mean voxel intensity in the matrix X 
 	mean = np.mean(X)
+        
+    # subtract the mean from each voxel intensity
 	zero_mean_mat = X - mean
-	cov_mat = np.cov(zero_mean_mat)
+        
+    # compute the covariance matrix of the zero mean image
+	cov_mat = np.cov(zero_mean_mat.T)
+        
+    # compute the eigenvalues and eigenvectors of the zeromean covariance matrix
 	eigenvalues, eigenvectors = np.linalg.eig(cov_mat)
-	sorted_indices = np.argsort(eigenvalues)[::-1]
-	sorted_eigenvalues = eigenvalues[sorted_indices]
-	sorted_eigenvectors = eigenvectors[:, sorted_indices]
-	kl_tx_mat = np.column_stack(sorted_eigenvectors)
-	return kl_tx_mat @ zero_mean_mat
+
+    # sort the indices of the eigenvalues from largest to smallest
+	idx = eigenvalues.argsort()[::-1]
 	
+    # use the sorted indices of the eigenvalues to re arrange the eigenvectors
+	eigenvectors = eigenvectors[:,idx]
+        
+    # create a matrix from the ordered eigenvalues (should a subset of these be used?)
+	kl_tx_mat = np.column_stack(eigenvectors)
+
+    # transform each datapoint by the     
+	tx_data = np.dot(zero_mean_mat, kl_tx_mat)
+	print("tx_data.shape: {}".format(tx_data.shape))
+
+
+	return tx_data
+
+# This function performs PCA whitening on an input matrix X
+def pca_whitening(X):
+    # Step 1: Calculate the mean
+    mean = np.mean(X)
+
+    # Step 2: Subtract the mean
+    zero_mean_mat = X - mean
+
+    # Step 3: Compute the covariance matrix
+    cov_mat = np.cov(zero_mean_mat.T)
+
+    # Step 4: Compute the eigenvectors and eigenvalues
+    eigenvalues, eigenvectors = np.linalg.eig(cov_mat)
+
+    # Step 5: Sort eigenvalues and eigenvectors
+    sorted_indices = np.argsort(eigenvalues)[::-1]
+    sorted_eigenvalues = eigenvalues[sorted_indices]
+    sorted_eigenvectors = eigenvectors[:, sorted_indices]
+
+    # Step 6: Whiten the data
+    epsilon = 1e-5  # Small constant to avoid division by zero
+    whitened_data = np.dot(zero_mean_mat, sorted_eigenvectors / np.sqrt(sorted_eigenvalues + epsilon))
+
+    return whitened_data
 
 
 ################################################################
 print("group_matrix = load_and_flatten_files()")
 group_matrix = load_and_flatten_files()
 
-print("A,S,W = perform_group_ICA(group_matrix)")
-A,S,W = perform_group_ICA(group_matrix)
+#print("A,S,W = perform_group_ICA(group_matrix)")
+#A,S,W = perform_group_ICA(group_matrix)
 
 #print("visualize_one_sub(A, n_components)")
 #visualize_one_sub(A, 50)
 
 
-print("E = compute_error_matrix(group_matrix, A)")
-error = compute_error_matrix(group_matrix, A@S)
+#print("E = compute_error_matrix(group_matrix, A)")
+#error = compute_error_matrix(group_matrix, A@S)
 
-print("error is {}".format(error))
+#print("error is {}".format(error))
+
+
+#print("pca_whitening(group_matrix)")
+#pca_img = pca_whitening(group_matrix)
+
+print("pca_img = pca(group_matrix)")
+pca_img = pca(group_matrix)
+
+print("pca_img matrix shape is {}".format(pca_img.shape))
+
+# These values are total # voxels in x,y,z dimension
+xdim=91
+ydim=109
+zdim=91
+total_vols=pca_img.shape[1]
+
+
+print("image_stack = np.zeros((xdim, ydim, zdim, total_vols))")
+image_stack = np.zeros((xdim, ydim, zdim, total_vols))
+
+
+
+
+# For each component, reshape each col of A into a 3D image
+for ix in range(total_vols):
+    print(" sm = pca_img[:, {}]".format(ix))
+    vol = pca_img[:, ix]
+    vol_pixels = np.array(vol).reshape(xdim, ydim, zdim)
+
+    image_stack[..., ix] = vol_pixels
+
+
+print("nifti_img = nib.Nifti1Image(image_stack, affine=np.eye(4))")
+nifti_img = nib.Nifti1Image(image_stack, affine=np.eye(4))
+
+# Save the NIfTI image to a file
+nifti_file = "pca.nii.gz"
+
+print("nib.save(nifti_img, {})".format(nifti_file))
+nib.save(nifti_img, nifti_file)
