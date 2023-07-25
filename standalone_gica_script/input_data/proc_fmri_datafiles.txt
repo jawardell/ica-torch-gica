@@ -1,1 +1,1 @@
-/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/000300655084/ses_01/processed/000300655084_rsfMRI_processed_rest.nii.gz
+/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/000800485677/ses_01/processed/000800485677_rest.nii.gz
