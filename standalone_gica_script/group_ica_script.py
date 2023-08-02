@@ -131,28 +131,28 @@ def compute_error_matrix(X,M):
 
 # This function performs PCA on the flattened data matrix X
 def pca(X):
-    # compute the mean voxel intensity in the matrix X 
+    	# compute the mean voxel intensity in the matrix X 
 	mean = np.mean(X)
         
-    # subtract the mean from each voxel intensity
+    	# subtract the mean from each voxel intensity
 	zero_mean_mat = X - mean
         
-    # compute the covariance matrix of the zero mean image
+   	# compute the covariance matrix of the zero mean image
 	cov_mat = np.cov(zero_mean_mat.T)
         
-    # compute the eigenvalues and eigenvectors of the zeromean covariance matrix
+    	# compute the eigenvalues and eigenvectors of the zeromean covariance matrix
 	eigenvalues, eigenvectors = np.linalg.eig(cov_mat)
 
-    # sort the indices of the eigenvalues from largest to smallest
+    	# sort the indices of the eigenvalues from largest to smallest
 	idx = eigenvalues.argsort()[::-1]
 	
-    # use the sorted indices of the eigenvalues to re arrange the eigenvectors
+    	# use the sorted indices of the eigenvalues to re arrange the eigenvectors
 	eigenvectors = eigenvectors[:,idx]
         
-    # create a matrix from the ordered eigenvalues (should a subset of these be used?)
+   	# create a matrix from the ordered eigenvalues (should a subset of these be used?)
 	kl_tx_mat = np.column_stack(eigenvectors)
 
-    # transform each datapoint by the     
+    	# transform each datapoint by the     
 	tx_data = np.dot(zero_mean_mat, kl_tx_mat)
 	print("tx_data.shape: {}".format(tx_data.shape))
 
@@ -160,7 +160,9 @@ def pca(X):
 	return tx_data
 
 # This function performs PCA whitening on an input matrix X
-def pca_whitening(X):
+# Whiten the signal in X by centering and normalizing by the variance
+
+def pca_whitening(X, n_comps):
     # Calculate the mean
     mean = np.mean(X)
 
@@ -178,9 +180,15 @@ def pca_whitening(X):
     sorted_eigenvalues = eigenvalues[sorted_indices]
     sorted_eigenvectors = eigenvectors[:, sorted_indices]
 
-    # Whiten the data
+    # Get the top K eigenvectors, K=n_comps
+    top_k_eigenvectors = sorted_eigenvectors[:, :n_comps]
+    top_k_eigenvalues = sorted_eigenvalues[:n_comps]
+
+
+    # Whiten the data (divide all entries in X by the variance)
     epsilon = 1e-5  # Small constant to avoid division by zero
-    whitened_data = np.dot(zero_mean_mat, sorted_eigenvectors / np.sqrt(sorted_eigenvalues + epsilon))
+    whitened_data = np.dot(zero_mean_mat, top_k_eigenvectors / np.sqrt(top_k_eigenvalues + epsilon))
+
 
     return whitened_data
 
@@ -214,8 +222,9 @@ group_matrix = load_and_flatten_files()
 #print("A,S,W = perform_group_ICA(group_matrix)")
 #A,S,W = perform_group_ICA(group_matrix)
 
+n_comps = 50
 #print("visualize_one_sub(A, n_components)")
-#visualize_one_sub(A, 50)
+#visualize_one_sub(A, n_comps)
 
 
 #print("E = compute_error_matrix(group_matrix, A)")
@@ -224,11 +233,11 @@ group_matrix = load_and_flatten_files()
 #print("error is {}".format(error))
 
 
-#print("pca_whitening(group_matrix)")
-#pca_img = pca_whitening(group_matrix)
+print("pca_whitening(group_matrix)")
+pca_img = pca_whitening(group_matrix, n_comps)
 
-print("pca_img = pca(group_matrix)")
-pca_img = pca(group_matrix)
+#print("pca_img = pca(group_matrix)")
+#pca_img = pca(group_matrix)
 
 print("pca_img matrix shape is {}".format(pca_img.shape))
 
@@ -237,6 +246,7 @@ xdim=91
 ydim=109
 zdim=91
 total_vols=pca_img.shape[1]
+#total_vols=n_comps
 
 
 print("image_stack = np.zeros((xdim, ydim, zdim, total_vols))")
@@ -247,7 +257,6 @@ image_stack = np.zeros((xdim, ydim, zdim, total_vols))
 
 # For each component, reshape each col of A into a 3D image
 for ix in range(total_vols):
-    print(" sm = pca_img[:, {}]".format(ix))
     vol = pca_img[:, ix]
     vol_pixels = np.array(vol).reshape(xdim, ydim, zdim)
 
@@ -258,7 +267,7 @@ print("nifti_img = nib.Nifti1Image(image_stack, affine=np.eye(4))")
 nifti_img = nib.Nifti1Image(image_stack, affine=np.eye(4))
 
 # Save the NIfTI image to a file
-nifti_file = "pca.nii.gz"
+nifti_file = "pca_whitened_000800485677.nii.gz"
 
 print("nib.save(nifti_img, {})".format(nifti_file))
 nib.save(nifti_img, nifti_file)
