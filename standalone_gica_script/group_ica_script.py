@@ -161,28 +161,50 @@ def pca(X):
 
 # This function performs PCA whitening on an input matrix X
 def pca_whitening(X):
-    # Step 1: Calculate the mean
+    # Calculate the mean
     mean = np.mean(X)
 
-    # Step 2: Subtract the mean
+    # Subtract the mean
     zero_mean_mat = X - mean
 
-    # Step 3: Compute the covariance matrix
+    # Compute the covariance matrix
     cov_mat = np.cov(zero_mean_mat.T)
 
-    # Step 4: Compute the eigenvectors and eigenvalues
+    # Compute the eigenvectors and eigenvalues
     eigenvalues, eigenvectors = np.linalg.eig(cov_mat)
 
-    # Step 5: Sort eigenvalues and eigenvectors
+    # Sort eigenvalues and eigenvectors
     sorted_indices = np.argsort(eigenvalues)[::-1]
     sorted_eigenvalues = eigenvalues[sorted_indices]
     sorted_eigenvectors = eigenvectors[:, sorted_indices]
 
-    # Step 6: Whiten the data
+    # Whiten the data
     epsilon = 1e-5  # Small constant to avoid division by zero
     whitened_data = np.dot(zero_mean_mat, sorted_eigenvectors / np.sqrt(sorted_eigenvalues + epsilon))
 
     return whitened_data
+
+def backward_project():
+	# Transpose the Mixing Matrix W
+	W_T = W.T
+
+	# Separate Subject-Specific ICs
+	Y = np.dot(W_T, X)  # Y has shape (n_components, num_timepoints)
+
+	# Separate Subject-Specific Time Courses
+	Y_T = Y.T  # Y_T has shape (num_timepoints, n_components)
+
+	# Separate Subject-Specific ICs (Spatial Maps)
+	A_T = A.T  # A_T has shape (n_components, num_voxels)
+
+	# Subject-Specific ICs and TCs
+	# Each row of Y_T represents the ICs for a subject
+	subject_specific_ICs = Y_T  
+
+	# Each row of A_T represents the TC for a subject
+	subject_specific_TCs = A_T  
+
+
 
 
 ################################################################
