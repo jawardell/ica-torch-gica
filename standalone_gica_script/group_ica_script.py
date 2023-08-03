@@ -3,6 +3,8 @@ import pickle
 import matplotlib.pyplot as plt
 import numpy as np
 import nibabel as nib
+from sklearn.decomposition import PCA
+
 
 # This script performs group ICA on a study's set of processed fMRI files
 def load_and_flatten_files():
@@ -16,7 +18,8 @@ def load_and_flatten_files():
     print("Initialize an empty list to store the flattened data")
     subject_matrices = []
     ix = 0
-
+    num_subs = len(file_paths)
+    
     print("Iterate over the file paths and load the NIfTI files")
     for path in file_paths:
         try:
@@ -41,7 +44,7 @@ def load_and_flatten_files():
             print("Create flattened matrix")
             flattened_matrix = data.reshape((num_voxels, num_timepoints))
 
-            print("Insert flattened matrix into list")
+            print("Insert flattened matrix {}/{} into list".format(ix+1, num_subs))
             subject_matrices.insert(ix, np.array(flattened_matrix))
             ix += 1
 
@@ -114,7 +117,7 @@ def visualize_one_sub(A, n_components):
     nifti_img = nib.Nifti1Image(image_stack, affine=np.eye(4))
 
     # Save the NIfTI image to a file
-    nifti_file = "SM.nii.gz"
+    nifti_file = "SM_full.nii.gz"
     nib.save(nifti_img, nifti_file)
 
 # This function saves the group matrix as a pickle
@@ -192,6 +195,12 @@ def pca_whitening(X, n_comps):
 
     return whitened_data
 
+def pca_whitening_sklearn(X, n_comps):
+    pca = PCA(n_components=n_comps, whiten=True)
+    X_whitened = pca.fit_transform(X)
+    return X_whitened
+
+
 def backward_project():
 	# Transpose the Mixing Matrix W
 	W_T = W.T
@@ -219,12 +228,12 @@ def backward_project():
 print("group_matrix = load_and_flatten_files()")
 group_matrix = load_and_flatten_files()
 
-#print("A,S,W = perform_group_ICA(group_matrix)")
-#A,S,W = perform_group_ICA(group_matrix)
+print("A,S,W = perform_group_ICA(group_matrix)")
+A,S,W = perform_group_ICA(group_matrix)
 
 n_comps = 50
-#print("visualize_one_sub(A, n_components)")
-#visualize_one_sub(A, n_comps)
+print("visualize_one_sub(A, n_components)")
+visualize_one_sub(A, n_comps)
 
 
 #print("E = compute_error_matrix(group_matrix, A)")
@@ -233,41 +242,15 @@ n_comps = 50
 #print("error is {}".format(error))
 
 
-print("pca_whitening(group_matrix)")
-pca_img = pca_whitening(group_matrix, n_comps)
+#print("pca_whitening(group_matrix)")
+#pca_img = pca_whitening(group_matrix, n_comps)
+
+#X = group_matrix
+#print("pca_whitening_sklearn(X, n_comps)")
+#pca_img = pca_whitening_sklearn(X, n_comps)
+
 
 #print("pca_img = pca(group_matrix)")
 #pca_img = pca(group_matrix)
 
-print("pca_img matrix shape is {}".format(pca_img.shape))
-
-# These values are total # voxels in x,y,z dimension
-xdim=91
-ydim=109
-zdim=91
-total_vols=pca_img.shape[1]
-#total_vols=n_comps
-
-
-print("image_stack = np.zeros((xdim, ydim, zdim, total_vols))")
-image_stack = np.zeros((xdim, ydim, zdim, total_vols))
-
-
-
-
-# For each component, reshape each col of A into a 3D image
-for ix in range(total_vols):
-    vol = pca_img[:, ix]
-    vol_pixels = np.array(vol).reshape(xdim, ydim, zdim)
-
-    image_stack[..., ix] = vol_pixels
-
-
-print("nifti_img = nib.Nifti1Image(image_stack, affine=np.eye(4))")
-nifti_img = nib.Nifti1Image(image_stack, affine=np.eye(4))
-
-# Save the NIfTI image to a file
-nifti_file = "pca_whitened_000800485677.nii.gz"
-
-print("nib.save(nifti_img, {})".format(nifti_file))
-nib.save(nifti_img, nifti_file)
+#print("pca_img matrix shape is {}".format(pca_img.shape))
