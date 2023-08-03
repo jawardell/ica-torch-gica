@@ -3,6 +3,8 @@ import pickle
 import matplotlib.pyplot as plt
 import numpy as np
 import nibabel as nib
+from sklearn.decomposition import PCA
+
 
 # This script performs group ICA on a study's set of processed fMRI files
 def load_and_flatten_files():
@@ -16,7 +18,8 @@ def load_and_flatten_files():
     print("Initialize an empty list to store the flattened data")
     subject_matrices = []
     ix = 0
-
+    num_subs = len(file_paths)
+    
     print("Iterate over the file paths and load the NIfTI files")
     for path in file_paths:
         try:
@@ -41,7 +44,7 @@ def load_and_flatten_files():
             print("Create flattened matrix")
             flattened_matrix = data.reshape((num_voxels, num_timepoints))
 
-            print("Insert flattened matrix into list")
+            print("Insert flattened matrix {}/{} into list".format(ix+1, num_subs))
             subject_matrices.insert(ix, np.array(flattened_matrix))
             ix += 1
 
@@ -114,7 +117,7 @@ def visualize_one_sub(A, n_components):
     nifti_img = nib.Nifti1Image(image_stack, affine=np.eye(4))
 
     # Save the NIfTI image to a file
-    nifti_file = "SM.nii.gz"
+    nifti_file = "SM_full.nii.gz"
     nib.save(nifti_img, nifti_file)
 
 # This function saves the group matrix as a pickle
@@ -131,28 +134,28 @@ def compute_error_matrix(X,M):
 
 # This function performs PCA on the flattened data matrix X
 def pca(X):
-    # compute the mean voxel intensity in the matrix X 
+    	# compute the mean voxel intensity in the matrix X 
 	mean = np.mean(X)
         
-    # subtract the mean from each voxel intensity
+    	# subtract the mean from each voxel intensity
 	zero_mean_mat = X - mean
         
-    # compute the covariance matrix of the zero mean image
+   	# compute the covariance matrix of the zero mean image
 	cov_mat = np.cov(zero_mean_mat.T)
         
-    # compute the eigenvalues and eigenvectors of the zeromean covariance matrix
+    	# compute the eigenvalues and eigenvectors of the zeromean covariance matrix
 	eigenvalues, eigenvectors = np.linalg.eig(cov_mat)
 
-    # sort the indices of the eigenvalues from largest to smallest
+    	# sort the indices of the eigenvalues from largest to smallest
 	idx = eigenvalues.argsort()[::-1]
 	
-    # use the sorted indices of the eigenvalues to re arrange the eigenvectors
+    	# use the sorted indices of the eigenvalues to re arrange the eigenvectors
 	eigenvectors = eigenvectors[:,idx]
         
-    # create a matrix from the ordered eigenvalues (should a subset of these be used?)
+   	# create a matrix from the ordered eigenvalues (should a subset of these be used?)
 	kl_tx_mat = np.column_stack(eigenvectors)
 
-    # transform each datapoint by the     
+    	# transform each datapoint by the     
 	tx_data = np.dot(zero_mean_mat, kl_tx_mat)
 	print("tx_data.shape: {}".format(tx_data.shape))
 
@@ -160,40 +163,71 @@ def pca(X):
 	return tx_data
 
 # This function performs PCA whitening on an input matrix X
-def pca_whitening(X):
-    # Step 1: Calculate the mean
+# Whiten the signal in X by centering and normalizing by the variance
+
+def pca_whitening(X, n_comps):
+    # Calculate the mean
     mean = np.mean(X)
 
-    # Step 2: Subtract the mean
+    # Subtract the mean
     zero_mean_mat = X - mean
 
-    # Step 3: Compute the covariance matrix
+    # Compute the covariance matrix
     cov_mat = np.cov(zero_mean_mat.T)
 
-    # Step 4: Compute the eigenvectors and eigenvalues
+    # Compute the eigenvectors and eigenvalues
     eigenvalues, eigenvectors = np.linalg.eig(cov_mat)
 
-    # Step 5: Sort eigenvalues and eigenvectors
+    # Sort eigenvalues and eigenvectors
     sorted_indices = np.argsort(eigenvalues)[::-1]
     sorted_eigenvalues = eigenvalues[sorted_indices]
     sorted_eigenvectors = eigenvectors[:, sorted_indices]
 
-    # Step 6: Whiten the data
+    # Get the top K eigenvectors, K=n_comps
+    top_k_eigenvectors = sorted_eigenvectors[:, :n_comps]
+    top_k_eigenvalues = sorted_eigenvalues[:n_comps]
+
+
+    # Whiten the data (divide all entries in X by the variance)
     epsilon = 1e-5  # Small constant to avoid division by zero
-    whitened_data = np.dot(zero_mean_mat, sorted_eigenvectors / np.sqrt(sorted_eigenvalues + epsilon))
+    whitened_data = np.dot(zero_mean_mat, top_k_eigenvectors / np.sqrt(top_k_eigenvalues + epsilon))
+
 
     return whitened_data
+
+def pca_whitening_sklearn(X, n_comps):
+    pca = PCA(n_components=n_comps, whiten=True)
+    X_whitened = pca.fit_transform(X)
+    return X_whitened
+
+
+def backward_project_timecourses(X, W):
+	# Transpose the Mixing Matrix W
+	W_T = W.T
+
+	# Separate Subject-Specific ICs
+	Y = np.dot(W_T, X)  # Y has shape (n_components, num_timepoints)
+
+	# Separate Subject-Specific Time Courses
+	Y_T = Y.T  # Y_T has shape (num_timepoints, n_components)
+
+	# Each row of Y_T represents the TCs for a subject
+	subject_specific_TCs = Y_T  
+
+	return subject_specific_TCs
+
 
 
 ################################################################
 print("group_matrix = load_and_flatten_files()")
 group_matrix = load_and_flatten_files()
 
-#print("A,S,W = perform_group_ICA(group_matrix)")
-#A,S,W = perform_group_ICA(group_matrix)
+print("A,S,W = perform_group_ICA(group_matrix)")
+A,S,W = perform_group_ICA(group_matrix)
 
-#print("visualize_one_sub(A, n_components)")
-#visualize_one_sub(A, 50)
+n_comps = 50
+print("visualize_one_sub(A, n_components)")
+visualize_one_sub(A, n_comps)
 
 
 #print("E = compute_error_matrix(group_matrix, A)")
@@ -203,40 +237,14 @@ group_matrix = load_and_flatten_files()
 
 
 #print("pca_whitening(group_matrix)")
-#pca_img = pca_whitening(group_matrix)
+#pca_img = pca_whitening(group_matrix, n_comps)
 
-print("pca_img = pca(group_matrix)")
-pca_img = pca(group_matrix)
-
-print("pca_img matrix shape is {}".format(pca_img.shape))
-
-# These values are total # voxels in x,y,z dimension
-xdim=91
-ydim=109
-zdim=91
-total_vols=pca_img.shape[1]
+#X = group_matrix
+#print("pca_whitening_sklearn(X, n_comps)")
+#pca_img = pca_whitening_sklearn(X, n_comps)
 
 
-print("image_stack = np.zeros((xdim, ydim, zdim, total_vols))")
-image_stack = np.zeros((xdim, ydim, zdim, total_vols))
+#print("pca_img = pca(group_matrix)")
+#pca_img = pca(group_matrix)
 
-
-
-
-# For each component, reshape each col of A into a 3D image
-for ix in range(total_vols):
-    print(" sm = pca_img[:, {}]".format(ix))
-    vol = pca_img[:, ix]
-    vol_pixels = np.array(vol).reshape(xdim, ydim, zdim)
-
-    image_stack[..., ix] = vol_pixels
-
-
-print("nifti_img = nib.Nifti1Image(image_stack, affine=np.eye(4))")
-nifti_img = nib.Nifti1Image(image_stack, affine=np.eye(4))
-
-# Save the NIfTI image to a file
-nifti_file = "pca.nii.gz"
-
-print("nib.save(nifti_img, {})".format(nifti_file))
-nib.save(nifti_img, nifti_file)
+#print("pca_img matrix shape is {}".format(pca_img.shape))
