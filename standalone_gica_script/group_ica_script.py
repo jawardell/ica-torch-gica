@@ -132,50 +132,21 @@ def compute_error_matrix(X,M):
     error = np.mean(diff)
     return error
 
-# This function performs PCA on the flattened data matrix X
-def pca(X):
-    	# compute the mean voxel intensity in the matrix X 
-	mean = np.mean(X)
-        
-    	# subtract the mean from each voxel intensity
-	zero_mean_mat = X - mean
-        
-   	# compute the covariance matrix of the zero mean image
-	cov_mat = np.cov(zero_mean_mat.T)
-        
-    	# compute the eigenvalues and eigenvectors of the zeromean covariance matrix
-	eigenvalues, eigenvectors = np.linalg.eig(cov_mat)
-
-    	# sort the indices of the eigenvalues from largest to smallest
-	idx = eigenvalues.argsort()[::-1]
-	
-    	# use the sorted indices of the eigenvalues to re arrange the eigenvectors
-	eigenvectors = eigenvectors[:,idx]
-        
-   	# create a matrix from the ordered eigenvalues (should a subset of these be used?)
-	kl_tx_mat = np.column_stack(eigenvectors)
-
-    	# transform each datapoint by the     
-	tx_data = np.dot(zero_mean_mat, kl_tx_mat)
-	print("tx_data.shape: {}".format(tx_data.shape))
-
-
-	return tx_data
 
 # This function performs PCA whitening on an input matrix X
 # Whiten the signal in X by centering and normalizing by the variance
 
 def pca_whitening(X, n_comps):
-    # Calculate the mean
+    # Calculate the mean voxel intensity value
     mean = np.mean(X)
 
-    # Subtract the mean
+    # Subtract the mean from each voxel
     zero_mean_mat = X - mean
 
-    # Compute the covariance matrix
+    # Compute the covariance matrix of centered data
     cov_mat = np.cov(zero_mean_mat.T)
 
-    # Compute the eigenvectors and eigenvalues
+    # Compute the eigenvectors and eigenvalues of cov. mat
     eigenvalues, eigenvectors = np.linalg.eig(cov_mat)
 
     # Sort eigenvalues and eigenvectors
@@ -188,19 +159,21 @@ def pca_whitening(X, n_comps):
     top_k_eigenvalues = sorted_eigenvalues[:n_comps]
 
 
-    # Whiten the data (divide all entries in X by the variance)
+    # Whiten the data (divide centered data by its variance)
+    # Transform the whitened data into the eigenvector space (PCA)
     epsilon = 1e-5  # Small constant to avoid division by zero
     whitened_data = np.dot(zero_mean_mat, top_k_eigenvectors / np.sqrt(top_k_eigenvalues + epsilon))
 
 
     return whitened_data
 
+# This function calls on sklearn pca to compare with the above function
 def pca_whitening_sklearn(X, n_comps):
     pca = PCA(n_components=n_comps, whiten=True)
     X_whitened = pca.fit_transform(X)
     return X_whitened
 
-
+# This function computes the subject specific time courses from W and X
 def backward_project_timecourses(X, W):
 	# Transpose the Mixing Matrix W
 	W_T = W.T
@@ -218,7 +191,11 @@ def backward_project_timecourses(X, W):
 
 
 
-################################################################
+
+###################################################################################
+###################################################################################
+###################################################################################
+
 print("group_matrix = load_and_flatten_files()")
 group_matrix = load_and_flatten_files()
 
