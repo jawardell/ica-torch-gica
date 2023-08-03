@@ -201,7 +201,7 @@ def pca_whitening_sklearn(X, n_comps):
     return X_whitened
 
 
-def backward_project():
+def backward_project_timecourses(X, W):
 	# Transpose the Mixing Matrix W
 	W_T = W.T
 
@@ -211,16 +211,10 @@ def backward_project():
 	# Separate Subject-Specific Time Courses
 	Y_T = Y.T  # Y_T has shape (num_timepoints, n_components)
 
-	# Separate Subject-Specific ICs (Spatial Maps)
-	A_T = A.T  # A_T has shape (n_components, num_voxels)
+	# Each row of Y_T represents the TCs for a subject
+	subject_specific_TCs = Y_T  
 
-	# Subject-Specific ICs and TCs
-	# Each row of Y_T represents the ICs for a subject
-	subject_specific_ICs = Y_T  
-
-	# Each row of A_T represents the TC for a subject
-	subject_specific_TCs = A_T  
-
+	return subject_specific_TCs
 
 
 
