@@ -1,4 +1,5 @@
 from ica import ica1
+import logging as log
 import pickle
 import matplotlib.pyplot as plt
 import numpy as np
@@ -6,10 +7,56 @@ import nibabel as nib
 from sklearn.decomposition import PCA
 
 
-# This script performs group ICA on a study's set of processed fMRI files
-def load_and_flatten_files():
-    print("Read the file paths from proc_fmri_datafiles.txt")
-    with open('input_data/proc_fmri_datafiles.txt', 'r') as file:
+""" Returns a 3D boolean array of the group mean mask NIfTI file
+	:param groupmask_filepath: Filepath to NIfTI file or 
+		simlink of the group mean mask for the dataset
+	:type groupmask_filepath: string
+	:return: A 3D numpy array of boolean values, 
+		True values are brain voxels,
+		False values are not brain voxels
+	:rtype: numpy.array(dtype=bool)
+"""
+def groupmask_to_ind(groupmask_filepath):
+    # load the groupmask file into the program using the simlink at input_data dir
+    print("img = nib.load(groupmask_file)")
+    img = nib.load(groupmask_filepath)
+    
+    print("data = img.get_fdata")
+    data = img.get_fdata()
+
+    # convert the group mask to a boolean array
+    print("boolean_mask = np.asarray(data, dtype=bool)")
+    boolean_mask = np.asarray(data, dtype=bool)
+    
+    return boolean_mask  
+
+""" Applies the group mask to the input data
+	:param groupmask: 3D numpy boolean array brain mask
+	:type groupmask: numpy.array(dtype=bool)
+	:param data: 4D numpy float array of time series fMRI BOLD signal
+	:type data: numpy.array(dtype=float)
+	:return: A 4D numpy float array of time series fMRI BOLD signal 
+		with only brain voxels, background has been deleted
+	:rtype: numpy.array(dtype=float)
+""" 
+def mask_input_data(groupmask, data):
+    print()
+    brain_voxels = data[groupmask]
+    return brain_voxels
+
+
+""" Loads all NIfTI files from the input txt file and concatenates 
+	them into one 2D numpy float array
+	:param proc_fmri_datafiles: Path to txt file containing all 
+		locations of preprocessed fMRI data
+	type proc_fmri_files: string
+	:return: A 2D numpy float array of a study's concatenated
+		fMRI data
+	:rtype: numpy.array(dtype=float)
+"""
+def load_and_flatten_files(proc_fmri_datafiles):
+    print("Read the file paths from proc_fmri_datafiles txt file")
+    with open(proc_fmri_datafiles, 'r') as file:
         file_paths = file.read().split(',')
 
     print("Remove leading/trailing whitespace from file paths")
@@ -134,8 +181,7 @@ def compute_error_matrix(X,M):
 
 
 # This function performs PCA whitening on an input matrix X
-# Whiten the signal in X by centering and normalizing by the variance
-
+# Should it be two separate functions?
 def pca_whitening(X, n_comps):
     # Calculate the mean voxel intensity value
     mean = np.mean(X)
