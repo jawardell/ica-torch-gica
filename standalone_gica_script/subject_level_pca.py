@@ -27,7 +27,7 @@ def save_mat_as_bin(X, outpath, sub_id, prefix):
     torch.save(X, filename)
 
 
-def save_data_as_nifti(X, outpath, sub_id, prefix, fmri_dimensions, n_comps):
+def save_data_as_nifti(X, outpath, sub_id, prefix):
     """ Writes the matrix X out as a NIfTI file to the 
     specified output directory.
     :param X: Flattened fMRI data matrix
@@ -45,30 +45,23 @@ def save_data_as_nifti(X, outpath, sub_id, prefix, fmri_dimensions, n_comps):
     :return: none
     :rtype: none
     """
-    xdim = fmri_dimensions[0]
-    ydim = fmri_dimensions[1]
-    zdim = fmri_dimensions[2]
-    num_vols = n_comps
+    xdim = X.shape[0]
+    ydim = X.shape[1]
+    zdim = X.shape[2]
+    num_vols = X.shape[3]
 
 
     # Create an empty 4D array to store all the 3D images
     print("image_stack = np.zeros((xdim, ydim, zdim, num_vols))")
     image_stack = np.zeros((xdim, ydim, zdim, num_vols))
 
-    print("image_stack.shape".format(image_stack.shape))
-    print("X.shape".format(X.shape))
-    
-    for ix in range(num_vols):
-        volume = X[ix, ...]
-
-        volume_voxels = np.array(volume).reshape(xdim, ydim, zdim)
-
-        # Add the current 3D image to the stack
-        image_stack[..., ix] = volume_voxels
+    print("image_stack.shape  {}".format(image_stack.shape))
+    print("X.shape {}".format(X.shape))
+   
 
     # Create a NIfTI image object from the stacked 4D array
     print("nifti_img = nib.Nifti1Image(image_stack, affine=np.eye(4))")
-    nifti_img = nib.Nifti1Image(image_stack, affine=np.eye(4))
+    nifti_img = nib.Nifti1Image(X, affine=np.eye(4))
 
     # Save the NIfTI image to a file
     nifti_file = "{}/{}_{}.nii.gz".format(outpath, sub_id, prefix)
@@ -76,33 +69,6 @@ def save_data_as_nifti(X, outpath, sub_id, prefix, fmri_dimensions, n_comps):
     
     nib.save(nifti_img, nifti_file)
 
-
-def flatten_nifti(fmri_data): 
-   """ This function takes a 4D image of fMRI data 
-	flattens it into a 2D matrix of time by voxels
-	and returns it
-	:param fmri_data: A 4D matrix of fMRI data
-	:type fmri_img: numpy.array(dtype=float)
-	:return: A 2D matrix of time by voxels 
-	:rtype: numpy.array(dtype=float)
-   """
-   print("Calculate the total number of voxels")
-   num_voxels = np.prod(fmri_data.shape[:-1])    
-
-   print("num_voxels is ")
-   print(num_voxels)
-
-   print("Get the number of timepoints")
-   num_timepoints = fmri_data.shape[-1]
-
-   print("num_timepoints is ")
-   print(num_timepoints)
-
-   print("flattened_matrix = data.reshape((num_timepoints, num_voxels))")
-    
-   flattened_matrix = fmri_data.reshape((num_voxels, num_timepoints))
-   return flattened_matrix
-    
 
 
 if __name__ == "__main__":
@@ -161,79 +127,49 @@ if __name__ == "__main__":
     #########################################################################################
     n_comps = 150 #should this be an argument of the script?
 
-    print("mask_img = nib.load(mask_filepath)")
-    mask_img = nib.load(mask_filepath)
 
-    print("mask_data = mask_img.get_fdata()")
-    mask_data = mask_img.get_fdata()
 
-    print("boolean_mask = np.asarray(mask_data, dtype=bool)")
-    boolean_mask = np.asarray(mask_data, dtype=bool)
+    # load your data
+    print("fmri_img = nib.load(func_filepath)")
+    fmri_img = nib.load(func_filepath) # this is currently the pca result, but it will be all your subject's timepoints otherwise, the goal is to get to `data` tensor (below)
 
-    print("brain_voxels = fmri_data[boolean_mask]")
-    brain_voxels = fmri_data[boolean_mask]
+    print("mask = nib.load(mask_filepath)")
+    mask = nib.load(mask_filepath) # the mask
 
-    print("num_brain_voxels = boolean_mask.sum()")
-    num_brain_voxels = boolean_mask.sum()
+    print("idx = np.where(mask.dataobj)")
+    idx = np.where(mask.dataobj) # indices of non-zero elements
+    print("idx {}".format(idx))
+
+    print("data = fmri_img.get_fdata()")
+    data = fmri_img.get_fdata() # this is the data of a subject with the last dimension being the total time duration
+
+    print("data2pca = data[*idx,:]")
+    data2pca = data[*idx,:] # this will be voxel by time data you need to apply the PCA to
+
+    # ... apply your PCA here to the appropriately transposed data to obtained pca_result
+    print("pca_result = pca_whiten(data2pca.T, n_comps)")
+    pca_result, white, dewhite = pca_whiten(data2pca.T, n_comps)
     
-    print("flattened_data = brain_voxels.reshape((num_vols, num_brain_voxels))")
-    flattened_data = brain_voxels.reshape((num_vols, num_brain_voxels))
+    print("pca_result.shape  {}".format(pca_result.shape))
+
+    print("pca_volumes = np.zeros(data.shape[:3], n_comps)")
+    pca_volumes = np.zeros((data.shape[0], data.shape[1], data.shape[2],  n_comps))
     
-
-    print("flattened_data.shape : {}".format(flattened_data.shape))
-
-    # Run PCA on the flattened data matrix of brain voxels
-    print("x_white, white, dewhite = pca_whiten(flattened_data.T, n_comps)")
-    x_white, white, dewhite = pca_whiten(flattened_data, n_comps)
-    print("x_white.shape: {}".format(x_white.shape))
+    print("pca_volumes[*idx,:] = pca_result")
+    #pca_volumes[*idx,:] = pca_result
+    pca_volumes[*idx,:] = pca_result.T
 
 
-    # Fill in result of PCA on brain voxels into correct indices
-    print("Fill in result of PCA on brain voxels into correct indices")
-    pca_res_flat = np.zeros((n_comps, num_voxels))
-
-    print("boolean_mask.shape {}".format(boolean_mask.shape))
-    print("pca_res_flat.shape {}".format(pca_res_flat.shape))
-    print("x_white.shape: {}".format(x_white.shape))
-    print("does x_white contain any 1s {}".format(np.asarray(x_white, dtype=bool).sum()))
-
-
-    boolean_mask_flat = boolean_mask.reshape((902629))
-    print("boolean_mask_flat.shape {}".format(boolean_mask_flat.shape))
-
-    print("how many 1s in boolean_mask_flat {}".format(boolean_mask_flat.sum()))
+    print("pca_volumes.shape {}".format(pca_volumes.shape))
     
-    print("type(boolean_mask_flat) {}".format(type(boolean_mask_flat)))
-    
-    print("type(boolean_mask_flat[0]) {}".format(type(boolean_mask_flat[0])))
-    
-
-    for i in range(x_white.shape[0]):#num comps
-        for j in range(x_white.shape[1]):#num voxels
-            if boolean_mask_flat[j]:
-
-                #print("inserting value into pca_res_flat {}".format(white_T[i]))
-                pca_res_flat[i][j] = x_white[i][j]
-        else:
-            pca_res_flat[i][j] = 0
-
-    print("pca_res_flat {} ".format(pca_res_flat))
-
-    # func --> fMRI data
-    # f --> data has been flattened
-    # m --> data has been masked
-    # w --> data has been whitened
-    # pca --> pca has been applied to the data
-    prefix = "func_f_m_w_pca"
-
-
     #####################################################
     #  Step 4: (Optional) Save data as NIfTI for visual inspection
     #####################################################
-    save_data_as_nifti(pca_res_flat, output_dir, sub_id, prefix, fmri_dimensions, n_comps)
+    prefix = "fmri_pca_w"
+    save_data_as_nifti(pca_volumes, output_dir, sub_id, prefix)
     
 
     ###########################################################################
     #  Step 5: Save flattened data as binary file to use during group analysis
     ###########################################################################
-    save_mat_as_bin(pca_res_flat, output_dir, sub_id, prefix)
+    save_mat_as_bin(pca_volumes, output_dir, sub_id, prefix)
