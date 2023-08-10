@@ -1,4 +1,5 @@
 from ica import ica1
+import logging as log
 import pickle
 import matplotlib.pyplot as plt
 import numpy as np
@@ -6,10 +7,56 @@ import nibabel as nib
 from sklearn.decomposition import PCA
 
 
-# This script performs group ICA on a study's set of processed fMRI files
-def load_and_flatten_files():
-    print("Read the file paths from proc_fmri_datafiles.txt")
-    with open('input_data/proc_fmri_datafiles.txt', 'r') as file:
+""" Returns a 3D boolean array of the group mean mask NIfTI file
+	:param groupmask_filepath: Filepath to NIfTI file or 
+		simlink of the group mean mask for the dataset
+	:type groupmask_filepath: string
+	:return: A 3D numpy array of boolean values, 
+		True values are brain voxels,
+		False values are not brain voxels
+	:rtype: numpy.array(dtype=bool)
+"""
+def groupmask_to_ind(groupmask_filepath):
+    # load the groupmask file into the program using the simlink at input_data dir
+    print("img = nib.load(groupmask_file)")
+    img = nib.load(groupmask_filepath)
+    
+    print("data = img.get_fdata")
+    data = img.get_fdata()
+
+    # convert the group mask to a boolean array
+    print("boolean_mask = np.asarray(data, dtype=bool)")
+    boolean_mask = np.asarray(data, dtype=bool)
+    
+    return boolean_mask  
+
+""" Applies the group mask to the input data
+	:param groupmask: 3D numpy boolean array brain mask
+	:type groupmask: numpy.array(dtype=bool)
+	:param data: 4D numpy float array of time series fMRI BOLD signal
+	:type data: numpy.array(dtype=float)
+	:return: A 4D numpy float array of time series fMRI BOLD signal 
+		with only brain voxels, background has been deleted
+	:rtype: numpy.array(dtype=float)
+""" 
+def mask_input_data(groupmask, data):
+    print()
+    brain_voxels = data[groupmask]
+    return brain_voxels
+
+
+""" Loads all NIfTI files from the input txt file and concatenates 
+	them into one 2D numpy float array
+	:param proc_fmri_datafiles: Path to txt file containing all 
+		locations of preprocessed fMRI data
+	type proc_fmri_files: string
+	:return: A 2D numpy float array of a study's concatenated
+		fMRI data
+	:rtype: numpy.array(dtype=float)
+"""
+def load_and_flatten_files(proc_fmri_datafiles):
+    print("Read the file paths from proc_fmri_datafiles txt file")
+    with open(proc_fmri_datafiles, 'r') as file:
         file_paths = file.read().split(',')
 
     print("Remove leading/trailing whitespace from file paths")
@@ -132,50 +179,20 @@ def compute_error_matrix(X,M):
     error = np.mean(diff)
     return error
 
-# This function performs PCA on the flattened data matrix X
-def pca(X):
-    	# compute the mean voxel intensity in the matrix X 
-	mean = np.mean(X)
-        
-    	# subtract the mean from each voxel intensity
-	zero_mean_mat = X - mean
-        
-   	# compute the covariance matrix of the zero mean image
-	cov_mat = np.cov(zero_mean_mat.T)
-        
-    	# compute the eigenvalues and eigenvectors of the zeromean covariance matrix
-	eigenvalues, eigenvectors = np.linalg.eig(cov_mat)
-
-    	# sort the indices of the eigenvalues from largest to smallest
-	idx = eigenvalues.argsort()[::-1]
-	
-    	# use the sorted indices of the eigenvalues to re arrange the eigenvectors
-	eigenvectors = eigenvectors[:,idx]
-        
-   	# create a matrix from the ordered eigenvalues (should a subset of these be used?)
-	kl_tx_mat = np.column_stack(eigenvectors)
-
-    	# transform each datapoint by the     
-	tx_data = np.dot(zero_mean_mat, kl_tx_mat)
-	print("tx_data.shape: {}".format(tx_data.shape))
-
-
-	return tx_data
 
 # This function performs PCA whitening on an input matrix X
-# Whiten the signal in X by centering and normalizing by the variance
-
+# Should it be two separate functions?
 def pca_whitening(X, n_comps):
-    # Calculate the mean
+    # Calculate the mean voxel intensity value
     mean = np.mean(X)
 
-    # Subtract the mean
+    # Subtract the mean from each voxel
     zero_mean_mat = X - mean
 
-    # Compute the covariance matrix
+    # Compute the covariance matrix of centered data
     cov_mat = np.cov(zero_mean_mat.T)
 
-    # Compute the eigenvectors and eigenvalues
+    # Compute the eigenvectors and eigenvalues of cov. mat
     eigenvalues, eigenvectors = np.linalg.eig(cov_mat)
 
     # Sort eigenvalues and eigenvectors
@@ -188,19 +205,21 @@ def pca_whitening(X, n_comps):
     top_k_eigenvalues = sorted_eigenvalues[:n_comps]
 
 
-    # Whiten the data (divide all entries in X by the variance)
+    # Whiten the data (divide centered data by its variance)
+    # Transform the whitened data into the eigenvector space (PCA)
     epsilon = 1e-5  # Small constant to avoid division by zero
     whitened_data = np.dot(zero_mean_mat, top_k_eigenvectors / np.sqrt(top_k_eigenvalues + epsilon))
 
 
     return whitened_data
 
+# This function calls on sklearn pca to compare with the above function
 def pca_whitening_sklearn(X, n_comps):
     pca = PCA(n_components=n_comps, whiten=True)
     X_whitened = pca.fit_transform(X)
     return X_whitened
 
-
+# This function computes the subject specific time courses from W and X
 def backward_project_timecourses(X, W):
 	# Transpose the Mixing Matrix W
 	W_T = W.T
@@ -218,7 +237,11 @@ def backward_project_timecourses(X, W):
 
 
 
-################################################################
+
+###################################################################################
+###################################################################################
+###################################################################################
+
 print("group_matrix = load_and_flatten_files()")
 group_matrix = load_and_flatten_files()
 
