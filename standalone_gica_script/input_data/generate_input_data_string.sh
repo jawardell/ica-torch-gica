@@ -5,8 +5,6 @@ num_subs=$(wc -l < "$subs_file")
 
 IFS=$'\n' sub_ids=($(cat ${subs_file}))
 
-touch sub_lev_pca_files.txt
-
 for(( i=0; i<$num_subs; i++))
 do
 	subjectID=${sub_ids[$i]}
