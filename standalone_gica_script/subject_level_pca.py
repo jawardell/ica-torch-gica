@@ -4,7 +4,6 @@ import nibabel as nib
 import sys
 import os
 import torch
-
 # This is a script that can compute each subject's PCA whitened data in parallel
 # The PCA whitened data is num_comps by num_voxels and is written out as a binary file
 
@@ -70,10 +69,6 @@ print("pca_result, white, dewhite = pca_whiten(data2pca.T, n_comps)")
 pca_result, white, dewhite = pca_whiten(data2pca.T, n_comps)
 
 
-
-
-
-#### Save PCA Result to Cluster ####
 ##### Save data as NIfTI (Optional) #####
 # create empty 4d array
 print("pca_volumes = np.zeros((data.shape[0], data.shape[1], data.shape[2],  n_comps))")
