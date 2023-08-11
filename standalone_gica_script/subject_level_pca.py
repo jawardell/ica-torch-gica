@@ -73,7 +73,9 @@ pca_result, white, dewhite = pca_whiten(data2pca.T, n_comps)
 
 
 
+
 #### Save PCA Result to Cluster ####
+
 ##### Save data as NIfTI (Optional) #####
 # create empty 4d array
 print("pca_volumes = np.zeros((data.shape[0], data.shape[1], data.shape[2],  n_comps))")
