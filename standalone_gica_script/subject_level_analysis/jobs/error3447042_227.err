@@ -1,4 +1,0 @@
-  File "/data/users2/jwardell1/ica-torch-gica/standalone_gica_script/subject_level_pca.py", line 10
-    >>>>>>> 427130095d96a93428ebe4046c6754a0118cf101
-                    ^
-SyntaxError: invalid decimal literal
