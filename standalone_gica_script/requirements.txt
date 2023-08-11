@@ -1,6 +1,0 @@
-ica
-numpy
-nibabel
-sys
-os
-torch
