@@ -4,7 +4,6 @@ import nibabel as nib
 import sys
 import os
 import torch
-import torch.linalg as tla
 
 # This is a script that can compute each subject's PCA whitened data in parallel
 # The PCA whitened data is num_comps by num_voxels and is written out as a binary file
@@ -70,54 +69,6 @@ print("n_comps = {}".format(n_comps))
 print("pca_result, white, dewhite = pca_whiten(data2pca.T, n_comps)")
 pca_result, white, dewhite = pca_whiten(data2pca.T, n_comps)
 
-
-
-
-
-
-
-
-#### Inspect PCA result #### 
-
-# check covariance matrix of whitening matrix
-xdim,ydim,zdim,vols = data.shape
-nvx = xdim*ydim*zdim
-data_flat = data.reshape((nvx, vols)) # vox by timepts
-x_demean = data_flat - data_flat.mean(axis=1).reshape((-1, 1))
-
-n_tpts, n_vox  = white.shape
-
-white_cov = (white @ white.T)/(n_tpts - 1)
-print("white_cov {}".format(white_cov))
-
-print("\n\n\n\n")
-
-# try reconstructing original data from dewhite matrix
-recon = np.dot(dewhite, pca_result)
-recon_vols = np.zeros((xdim,ydim,zdim,vols))
-recon_vols[*idx,:] = recon.T
-nifti_file = "{}/{}_recon.nii.gz".format(output_dir, sub_id)
-print("recon file is: {}".format(nifti_file))
-nifti_img = nib.Nifti1Image(recon_vols, affine=np.eye(4))
-print("nib.save(nifti_img, nifti_file)")
-nib.save(nifti_img, nifti_file)
-
-rcn = recon_vols.reshape((nvx, vols))
-mean_err = np.mean(x_demean - rcn)
-print("x_demean is {}".format(x_demean))
-print("recon is {}".format(recon))
-print("mean error is {}".format(mean_err))
-
-
-
-# visualize demeaned data as nifti file
-mean = np.mean(data)
-print("mean is {}".format(mean))
-x_demean = data - mean
-nifti_file = "{}/{}_demeaned.nii.gz".format(output_dir, sub_id)
-print("demeaned file is: {}".format(nifti_file))
-nifti_img = nib.Nifti1Image(x_demean, affine=np.eye(4))
-nib.save(nifti_img, nifti_file)
 
 
 
