@@ -4,6 +4,7 @@ import numpy as np
 import sys
 import os
 import nibabel as nib
+import torch
 
 
 
@@ -46,26 +47,8 @@ for path in file_paths:
             print("Error: subject level pca nii not found.")
             sys.exit()
 
-        print("img = nib.load(path)")
-        img = nib.load(path)
-
-        print("data = img.get_fdata()")
-        data = img.get_fdata()
-
-        print("Calculate the total number of voxels")
-        num_voxels = np.prod(data.shape[:-1])    
-
-        print("num_voxels is ")
-        print(num_voxels)
-
-        print("Get the number of comps")
-        num_comps = data.shape[-1]
-
-        print("num_comps is ")
-        print(num_comps)
-
-        print("Create flattened matrix")
-        flattened_matrix = data.reshape((num_comps, num_voxels))
+        
+        flattened_matrix = torch.load(path)
 
         print("Insert flattened matrix {}/{} into list".format(ix+1, num_subs))
         subject_matrices.insert(ix, np.array(flattened_matrix))
