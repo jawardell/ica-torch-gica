@@ -40,7 +40,6 @@ num_subs = len(file_paths)
 
 
 
-print("Iterate over the file paths and load the NIfTI files")
 for path in file_paths:
     try:
         if not os.path.isfile(sla_filepaths):
@@ -48,32 +47,27 @@ for path in file_paths:
             sys.exit()
 
         
-        flattened_matrix = torch.load(path)
+        flattened_matrix = torch.load(path).numpy()
 
-        print("Insert flattened matrix {}/{} into list".format(ix+1, num_subs))
         subject_matrices.insert(ix, np.array(flattened_matrix))
         ix += 1
 
     except:
         print(f"Error loading file: {path}")
 
-print("Concatenate all flattened subject matrices along the axis=1 axis")
 sl_concat = np.concatenate(subject_matrices, axis=1)
 
 
-print("Print the shape of the concatenated matrix of subject PCA data")
 print("Matrix shape:", sl_concat.shape)
 
 
 ##### run pca on concatenated matrix #####
 n_pca_comps = 150
-print("pca_res = pca_whiten(sl_concat, n_comps)")
 pca_res = pca_whiten(sl_concat, n_pca_comps)
 
 
 ##### run ica on pca result #####
 n_ica_comps = 50
-print("ica_res = ica1(pca_res, n_ica_comps)")
 A,S,W = ica1(pca_res, n_ica_comps)
 
 ##### save SMs as nifti #####
