@@ -59,7 +59,7 @@ print("data2pca.T.shape (observations by variables) {}".format(data2pca.T.shape)
 
 
 # number of components to retain
-n_comps = 50
+n_comps = 120
 print("n_comps = {}".format(n_comps))
 
 # ... apply PCA here to the appropriately transposed data to obtain pca_result (n_comps x voxels)
@@ -99,4 +99,5 @@ filename = "{}/{}_pca.torch".format(output_dir, sub_id)
 print("torch binary filename is {}".format(filename))
 
 # write pca matrix to disk (ncomps x voxels)
+nvox = data.shape[0] * data.shape[1] * data.shape[2]
 torch.save(pca_result, filename)
