@@ -55,12 +55,9 @@ data = fmri_img.get_fdata()
 
 # voxel by time data to apply the PCA to
 data2pca = data[*idx,:]
-print("data2pca.T.shape (observations by variables) {}".format(data2pca.T.shape))
-
 
 # number of components to retain
 n_comps = 120
-print("n_comps = {}".format(n_comps))
 
 # ... apply PCA here to the appropriately transposed data to obtain pca_result (n_comps x voxels)
 pca_result, white, dewhite = pca_whiten(data2pca.T, n_comps)

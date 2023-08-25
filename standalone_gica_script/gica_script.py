@@ -5,6 +5,7 @@ import sys
 import os
 import nibabel as nib
 import torch
+from sklearn import preprocessing
 
 #### Excessive print statements are for debugging purposes and will be removed after debugging #######
 
@@ -63,19 +64,9 @@ for path in file_paths:
 sl_concat = np.concatenate(subject_matrices, axis=0)
 
 
-'''
-##### run pca on concatenated matrix #####
-print("n_pca_comps = 50")
-n_pca_comps = 50
-
-print("pca_res, white, dewhite = pca_whiten(sl_concat, n_pca_comps)")
-pca_res, white, dewhite = pca_whiten(sl_concat, n_pca_comps)
-print("pca_res.shape, white.shape, dewhite.shape")
-'''
-
 
 ##### run ica on concatenated matrix #####
-n_ica_comps = 50
+n_ica_comps = 100
 
 A,S,W = ica1(sl_concat.T, n_ica_comps)
 
@@ -88,15 +79,18 @@ idx = np.where(mask_img.dataobj)
 
 image_stack = np.zeros((xdim, ydim, zdim, n_ica_comps))
 
-image_stack[*idx,:] = A
+A_scaled = preprocessing.MinMaxScaler(feature_range=(-1,1)).fit_transform(A)
+
+
+image_stack[*idx,:] = A_scaled
 
 
 #trying to orient result to match mask and prep data might not work though 
 nifti_img = nib.Nifti1Image(image_stack, mask_img.get_qform()) 
 
 
-nifti_img.header.set_qform(mask_img.header.get_qform(), code=4)  # Set the qform from the mask
-nifti_img.header.set_sform(mask_img.header.get_sform(), code=4)  # Set the sform from the mask
+nifti_img.header.set_qform(mask_img.header.get_qform(), code=mask_img.get_qform('code')[1])  # Set the qform from the mask code 4 means MNI space
+nifti_img.header.set_sform(mask_img.header.get_sform(), code=mask_img.get_qform('code')[1])  # Set the sform from the mask code 4 means MNI space
 nifti_img.header.set_xyzt_units(xyz='mm') # Set the xyz units to mm
 
 
