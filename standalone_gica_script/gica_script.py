@@ -84,8 +84,8 @@ A_scaled = np.zeros((x,y))
 # normalize each component's values to be from [-1,1]
 for ix in range(n_ica_comps):
 	comp = A[:,ix]
-	scaled_comp = preprocessing.MinMaxScaler(feature_range=(-1,1)).fit_transform(comp.reshape(1,-1))
-	A_scaled[:,ix] = scaled_comp
+	scaled_comp = preprocessing.MinMaxScaler(feature_range=(-1,1)).fit_transform(comp.reshape(-1,1))
+	A_scaled[:,ix] = scaled_comp.reshape(x)
 	
 
 
@@ -107,4 +107,3 @@ nifti_img.header.set_xyzt_units(xyz='mm') # Set the xyz units to mm
 nifti_file = "{}/group_SM.nii.gz".format(output_dir)
 
 nib.save(nifti_img, nifti_file)
-
