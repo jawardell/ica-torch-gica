@@ -78,15 +78,23 @@ xdim, ydim, zdim = mask_data.shape
 idx = np.where(mask_img.dataobj)
 
 image_stack = np.zeros((xdim, ydim, zdim, n_ica_comps))
+x,y = A.shape
+A_scaled = np.zeros((x,y))
 
-A_scaled = preprocessing.MinMaxScaler(feature_range=(-1,1)).fit_transform(A)
+# normalize each component's values to be from [-1,1]
+for ix in range(n_ica_comps):
+	comp = A[:,ix]
+	scaled_comp = preprocessing.MinMaxScaler(feature_range=(-1,1)).fit_transform(comp.reshape(1,-1))
+	A_scaled[:,ix] = scaled_comp
+	
+
 
 
 image_stack[*idx,:] = A_scaled
 
 
 #trying to orient result to match mask and prep data might not work though 
-nifti_img = nib.Nifti1Image(image_stack, mask_img.get_qform()) 
+nifti_img = nib.Nifti1Image(image_stack, affine=mask_img.get_qform()) 
 
 
 nifti_img.header.set_qform(mask_img.header.get_qform(), code=mask_img.get_qform('code')[1])  # Set the qform from the mask code 4 means MNI space
