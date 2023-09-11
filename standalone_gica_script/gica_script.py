@@ -1,5 +1,11 @@
-from ica import pca_whiten
+#this is brads code, to use, run   pip uninstall ica ...
+#from ica_torch.ica_torch import ica1 
+
+
+# this is alvero's code, to use, run   pip install ica ...
 from ica import ica1
+
+
 import numpy as np
 import sys
 import os
@@ -68,7 +74,18 @@ sl_concat = np.concatenate(subject_matrices, axis=0)
 ##### run ica on concatenated matrix #####
 n_ica_comps = 100
 
-A,S,W = ica1(sl_concat.T, n_ica_comps)
+A,S,W = ica1(torch.from_numpy(sl_concat), n_ica_comps)
+
+
+print("A.shape {}".format(A.shape))
+print("S.shape {}".format(S.shape))
+print("W.shape {}".format(W.shape))
+
+np.save('A.npy', A)
+np.save('S.npy', S)
+np.save('W.npy', W)
+
+
 
 ##### save SMs as nifti #####
 mask_img = nib.load(mask_filepath)
@@ -81,16 +98,23 @@ image_stack = np.zeros((xdim, ydim, zdim, n_ica_comps))
 x,y = A.shape
 A_scaled = np.zeros((x,y))
 
-# normalize each component's values to be from [-1,1]
+
+
+# normalize each component's intensity values
+'''
 for ix in range(n_ica_comps):
 	comp = A[:,ix]
-	scaled_comp = preprocessing.MinMaxScaler(feature_range=(-1,1)).fit_transform(comp.reshape(-1,1))
+	#scaled_comp = preprocessing.MinMaxScaler(feature_range=(-1,1)).fit_transform(comp.reshape(-1,1))
+	scaled_comp = preprocessing.StandardScaler().fit_transform(torch.flatten(comp))
+	print(scaled_comp.shape,x,A_scaled.shape)
 	A_scaled[:,ix] = scaled_comp.reshape(x)
-	
+'''
+
+#image_stack[*idx,:] = preprocessing.StandardScaler().fit_transform(A)#A_scaled 
 
 
 
-image_stack[*idx,:] = A_scaled
+image_stack[*idx,:] = preprocessing.StandardScaler().fit_transform(S.T)
 
 
 #trying to orient result to match mask and prep data might not work though 

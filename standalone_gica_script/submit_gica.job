@@ -25,12 +25,15 @@ conda activate /data/users2/jwardell1/miniconda3/envs/ica-torch
 GICA_DIR=/data/users2/jwardell1/ica-torch-gica/standalone_gica_script
 
 PATHS_FILE=${GICA_DIR}/input_data/sub_level_pca_files.txt
+#PATHS_FILE=${GICA_DIR}/input_data/sub_level_pca_files.dbg
 
 MASK_FILE=/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/group_mean_masks/groupmeanmask.nii
 
 OUTPUT_DIR=${GICA_DIR}/output_data
 
 python ${GICA_DIR}/gica_script.py $PATHS_FILE $MASK_FILE $OUTPUT_DIR
+
+python ${GICA_DIR}/plot_comps.py
 
 
 wait
