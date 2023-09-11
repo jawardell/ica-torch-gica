@@ -95,26 +95,17 @@ xdim, ydim, zdim = mask_data.shape
 idx = np.where(mask_img.dataobj)
 
 image_stack = np.zeros((xdim, ydim, zdim, n_ica_comps))
-x,y = A.shape
-A_scaled = np.zeros((x,y))
 
 
+# perform zscore normalization on the ica components
+S = preprocessing.StandardScaler().fit_transform(S.T)
 
-# normalize each component's intensity values
-'''
-for ix in range(n_ica_comps):
-	comp = A[:,ix]
-	#scaled_comp = preprocessing.MinMaxScaler(feature_range=(-1,1)).fit_transform(comp.reshape(-1,1))
-	scaled_comp = preprocessing.StandardScaler().fit_transform(torch.flatten(comp))
-	print(scaled_comp.shape,x,A_scaled.shape)
-	A_scaled[:,ix] = scaled_comp.reshape(x)
-'''
+# normalize each ICA components' voxels by the max absolute intensity value
+S = (np.diag(1/np.abs(S).max(axis=1))@S).astype('float32')	
 
-#image_stack[*idx,:] = preprocessing.StandardScaler().fit_transform(A)#A_scaled 
+# rebuild the 4D tensor of brain voxels
+image_stack[*idx,:] = S.T
 
-
-
-image_stack[*idx,:] = preprocessing.StandardScaler().fit_transform(S.T)
 
 
 #trying to orient result to match mask and prep data might not work though 
