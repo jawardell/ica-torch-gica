@@ -2,7 +2,6 @@
 *.sif
 *.png
 *.nii.gz
-*.nii.gz.bak
 .vscode/
 *.swp
 *.swo
