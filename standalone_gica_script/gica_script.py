@@ -101,7 +101,7 @@ image_stack = np.zeros((xdim, ydim, zdim, n_ica_comps))
 S = preprocessing.StandardScaler().fit_transform(S.T)
 
 # normalize each ICA components' voxels by the max absolute intensity value
-S = (np.diag(1/np.abs(S).max(axis=1))@S).astype('float32')	
+S = (np.diag(1/np.abs(S.T).max(axis=1))@S.T).astype('float32')	
 
 # rebuild the 4D tensor of brain voxels
 image_stack[*idx,:] = S.T
