@@ -112,6 +112,79 @@ def visual_normalize(S):
 
 
 
+import numpy as np
+import numpy.linalg as la
+
+def icatb_multi_fixed_ICA_R_Cor(mixedsig, refsig, loopnum, threshold, i_Rou, i_Uk, i_Gama, epsilon):
+    # Removes the mean of mixedsig and refsig.
+    mixedsigr = mixedsig - np.mean(mixedsig, axis=1, keepdims=True)
+    refsig = refsig - np.mean(refsig, axis=1, keepdims=True)
+
+    # Pre-whitening mixedsig and refsig
+    Rxx = np.cov(mixedsigr)
+    AV, B = la.eig(Rxx)
+    PreWhiten = np.dot(np.linalg.inv(np.sqrt(B)), AV.T)
+    DepreWhiten = np.dot(AV, np.sqrt(B))
+    X = np.dot(PreWhiten, mixedsigr)
+
+    r = refsig / np.std(refsig, axis=1, ddof=0, keepdims=True)
+    
+    # Parameters Setting
+    dim, numsamp = mixedsig.shape
+    dimr, numsampr = r.shape
+    threshold = threshold * np.ones(dimr)
+
+    Rou = i_Rou * np.ones(dimr)
+    Uk = i_Uk * np.ones(dimr)
+    Gama = i_Gama * np.ones(dimr)
+    
+    v = np.random.randn(dimr, numsamp)
+    W = np.zeros((dim, dimr))
+    Wold = W.copy()
+    y = np.zeros((dimr, numsamp)
+
+    for j in range(loopnum):
+        W = np.dot(X, np.dot(icatb_Gdfun(np.dot(W.T, X)).T, np.diag(Rou)) / numsamp + 0.5 * np.dot(X, np.dot(r.T, np.diag(Uk)) / numsamp
+        W = W / la.norm(W, axis=0)
+        y = np.dot(W.T, X)
+
+        for k in range(dimr):
+            if Uk[k] + Gama[k] * icatb_gw_yr_Cor(np.dot(W[:, k].T, X), r[k], numsamp, threshold[k]) > 0:
+                Uk[k] = Uk[k] + Gama[k] * icatb_gw_yr_Cor(np.dot(W[:, k].T, X), r[k], numsamp, threshold[k])
+            else:
+                Uk[k] = 0
+
+        Rou = np.mean(icatb_Gfun(y), axis=1) - np.mean(icatb_Gfun(v), axis=1)
+
+        W = W.T
+        W1 = la.sqrtm(np.dot(W, W.T))
+        W2 = la.inv(W1)
+        W = np.dot(W2, W)
+        W = W.T
+
+        minAbsW = np.min(np.abs(np.diag(np.dot(W.T, Wold)))
+        if 1 - minAbsW < epsilon:
+            print('computed (', j, 'steps)')
+            break
+
+        Wold = W
+
+    t_fixed_Cor = None  # You can replace this with timing code
+    W = np.dot(W.T, PreWhiten)
+    out_M = y
+    return out_M, W
+
+# You'll need to define or replace icatb_Gdfun, icatb_gw_yr_Cor, and icatb_Gfun functions
+
+
+
+
+
+
+########################################################################
+# CALL FUNCTIONS
+########################################################################
+
 if len(sys.argv) != 4:
     print("Usage: python gica_script.py sla_filepaths mask_filepath output_dir")
     print(sys.argv)
