@@ -1,0 +1,71 @@
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-12 20:35:11.290206
+INFO:pygigicar:Reference size (100, 58104)	Signal size (58104, 53)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 100 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-12 20:36:18.876897
+INFO:pygigicar:Reference size (100, 58104)	Signal size (58104, 53)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 100 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/58104
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-12 20:38:20.252118
+INFO:pygigicar:Reference size (100, 58104)	Signal size (53, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 100 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:root:(99, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-12 20:42:33.104783
+INFO:pygigicar:Reference size (100, 58104)	Signal size (53, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 100 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:root:(99, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-12 20:50:11.562549
+INFO:pygigicar:Reference size (58104, 100)	Signal size (58104, 53)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-12 20:57:12.828073
+INFO:pygigicar:Reference size (53, 58104)	Signal size (100, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 100 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:root:(99, 58104)

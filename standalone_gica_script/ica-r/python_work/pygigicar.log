@@ -1,0 +1,1415 @@
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-16 16:59:01.775661
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:root:(161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-16 19:33:12.168623
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:root:(161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 18:51:01.791383
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:root:(161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 18:54:57.213776
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:root:(161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 18:56:50.528017
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:root:(161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 18:57:45.987932
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:root:(161, 58104)
+INFO:pygigicar:gtg shape: (58104, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:07:08.185169
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: ()
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1 shape: ()
+INFO:root:(161, 58104)
+INFO:pygigicar:gtg shape: (58104, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:08:43.852803
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: ()
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1 shape: ()
+INFO:pygigicar:g shape: (161, 58104)
+INFO:pygigicar:gtg shape: (58104, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:10:39.657911
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: ()
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1 shape: ()
+INFO:pygigicar:Negama shape: ()
+INFO:pygigicar:EYgy shape: (161, 58104)
+INFO:pygigicar:Jy1 shape: ()
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:g shape: (161, 58104)
+INFO:pygigicar:gtg shape: (58104, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:11:39.161486
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: ()
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161, 58104)
+INFO:pygigicar:Jy1 shape: ()
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:g shape: (161, 58104)
+INFO:pygigicar:gtg shape: (58104, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:14:15.738535
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: ()
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161, 58104)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:g shape: (161, 58104)
+INFO:pygigicar:gtg shape: (58104, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:14:57.809751
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161, 58104)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:g shape: (161, 58104)
+INFO:pygigicar:gtg shape: (58104, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:17:01.964460
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161, 58104)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:17:30.345183
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161, 58104)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama shape: ()
+INFO:pygigicar:EYgy shape: (161, 58104)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:g shape: (161, 58104)
+INFO:pygigicar:gtg shape: (58104, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:18:20.391472
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161, 58104)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161, 58104)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:g shape: (161, 58104)
+INFO:pygigicar:gtg shape: (58104, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:24:24.459980
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:25:59.365646
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:28:56.327505
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:29:29.054170
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:29:47.097454
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:30:09.976522
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:32:11.481199
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:32:34.145721
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:m: 58104
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:34:51.317909
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:m: 58104
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:35:38.280211
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:36:20.398359
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:43:16.366268
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:45:32.591916
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:46:18.806995
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:47:09.831693
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:48:17.919240
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:48:39.661401
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:49:03.810822
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:49:47.731393
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:50:29.547137
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:52:25.217507
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:54:42.684721
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 19:55:02.721058
+INFO:pygigicar:Reference size (53, 58104)	Signal size (162, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Y shape (161, 58104)
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Yinv shape (58104, 161)
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:pygigicar:reference shape: (58104,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:wc shape: (161,)
+INFO:pygigicar:y1 shape: (58104,)
+INFO:pygigicar:EyrInitial shape: (58104,)
+INFO:pygigicar:NegeInitial shape: 0.13992421005794714
+INFO:pygigicar:c shape: (58104,)
+INFO:pygigicar:IniObjValue shape: (58104,)
+INFO:pygigicar:Cosy1 shape: (58104,)
+INFO:pygigicar:logCosy1 shape: (58104,)
+INFO:pygigicar:EGy1: 0.0005027611034637316
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:y1.shape: (58104,)
+INFO:pygigicar:Y.shape: (161, 58104)
+INFO:pygigicar:		EYgy shape: (161,)
+INFO:pygigicar:Jy1: 0.13992421005794714
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:a : 0.5
+INFO:pygigicar:KwDaoshu shape: (58104,)
+INFO:pygigicar:Negama: -0.37406444639653624
+INFO:pygigicar:EYgy shape: (161,)
+INFO:pygigicar:b: 0.5
+INFO:pygigicar:Simgrad shape: (161, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 20:14:50.486837
+INFO:pygigicar:Reference size (47, 153594)	Signal size (162, 153594)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 127 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 20:18:26.468848
+INFO:pygigicar:Reference size (162, 153594)	Signal size (47, 153594)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 127 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 20:19:39.213616
+INFO:pygigicar:Reference size (47, 153594)	Signal size (162, 153594)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 41 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 20:21:24.011939
+INFO:pygigicar:Reference size (47, 153594)	Signal size (162, 153594)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 41 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 20:24:55.503228
+INFO:pygigicar:Reference size (162, 60303)	Signal size (47, 60303)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 160 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/47
+INFO:root:(159, 60303)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 20:34:53.152010
+INFO:pygigicar:Reference size (162, 60303)	Signal size (47, 60303)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 160 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/47
+INFO:root:(159, 60303)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 20:38:06.659837
+INFO:pygigicar:Reference size (162, 60303)	Signal size (47, 60303)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 160 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/47
+INFO:root:(159, 60303)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 20:40:40.724546
+INFO:pygigicar:Reference size (162, 60303)	Signal size (47, 60303)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 160 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/47
+INFO:root:(159, 60303)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 20:49:24.692960
+INFO:pygigicar:Reference size (162, 60303)	Signal size (47, 60303)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 160 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/47
+INFO:root:(159, 60303)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 20:57:43.680559
+INFO:pygigicar:Reference size (162, 60303)	Signal size (47, 60303)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 160 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/47
+INFO:root:(159, 60303)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 21:00:58.403594
+INFO:pygigicar:Reference size (162, 60303)	Signal size (47, 60303)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 160 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/47
+INFO:root:(159, 60303)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 21:01:31.370993
+INFO:pygigicar:Reference size (162, 60303)	Signal size (47, 60303)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 160 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/47
+INFO:root:(159, 60303)
+INFO:pygigicar:
+
+Starting GIGICA at 2023-10-23 21:03:27.524007
+INFO:pygigicar:Reference size (162, 60303)	Signal size (47, 60303)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 160 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/47
+INFO:root:(159, 60303)
