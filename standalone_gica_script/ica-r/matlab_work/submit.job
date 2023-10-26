@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH -n 1
+#SBATCH -c 1
+#SBATCH --mem=64G
+#SBATCH -p qTRDHM
+#SBATCH --time=04:00:00
+#SBATCH -J ckICAR
+#SBATCH -e /data/users2/jwardell1/ica-torch-gica/standalone_gica_script/ica-r/matlab_work/jobs/error%A.err
+#SBATCH -o /data/users2/jwardell1/ica-torch-gica/standalone_gica_script/ica-r/matlab_work/jobs/out%A.out
+#SBATCH -A psy53c17
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=jwardell1@student.gsu.edu
+#SBATCH --oversubscribe
+
+sleep 5s
+
+bash run_gigicar.sh
+
+wait
+
+sleep 10s

@@ -42,5 +42,5 @@ disp(size(groupData));
 
 
 % Save the matrices as .mat files in the current working directory
-save("subject_data.mat", "subjectData");
-save("group_data.mat", "groupData");
+save("subject_data.mat", "subjectData", '-double');
+save("group_data.mat", "groupData", '-double');
