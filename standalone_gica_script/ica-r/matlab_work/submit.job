@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH -n 1
 #SBATCH -c 1
-#SBATCH --mem=64G
-#SBATCH -p qTRDHM
+#SBATCH --mem=32G
+#SBATCH -p qTRD
 #SBATCH --time=04:00:00
 #SBATCH -J ckICAR
 #SBATCH -e /data/users2/jwardell1/ica-torch-gica/standalone_gica_script/ica-r/matlab_work/jobs/error%A.err
@@ -14,7 +14,7 @@
 
 sleep 5s
 
-bash run_gigicar.sh
+bash gigicar.sh
 
 wait
 
