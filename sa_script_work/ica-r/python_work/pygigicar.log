@@ -1,0 +1,15 @@
+INFO:pygigicar:
+
+Starting GIGICA at 2024-01-04 19:44:58.557263
+INFO:pygigicar:Reference size (162, 58104)	Signal size (53, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:root:(161, 58104)
