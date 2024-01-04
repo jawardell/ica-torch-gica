@@ -42,7 +42,7 @@ cd $mask_dir
 export mask_file=${mask_dir}/mask_resampled.nii
 
 cd $prevdir
-#python ${ICAR_DIR}/datasets/fbirn-project/gigicar.py $sub_id $func_file $out_dir $mask_file $template_file
+#python ${ICAR_DIR}/gigicar.py $sub_id $func_file $out_dir $mask_file $template_file
 
 #cd $mask_dir
 #rm mask_resampled.nii

@@ -210,7 +210,28 @@ if not os.path.isfile(template_file):
 
 
 
+src_img = nib.load(func_file)
+src_data = src_img.get_fdata()
+print(f'src_data.shape {src_data.shape}')
 
+ref_img = nib.load(template_file)
+ref_data = ref_img.get_fdata()
+print(f'ref_data.shape {ref_data.shape}')
+
+mask_img = nib.load(mask_file)
+idx = np.where(mask_img.dataobj)
+
+#mask source and reference images
+src_data = src_data[*idx,:]
+print(f'src_data.shape {src_data.shape}')
+
+ref_data = ref_data[*idx,:]
+print(f'ref_data.shape {ref_data.shape}')
+
+ICOutMax, TCMax = gigicar(src_data.T, ref_data.T)
+
+
+'''
 import scipy.io as sio
 
 
@@ -237,4 +258,4 @@ src_img = mask_img(src_img, mask)
 print(f'src_img.shape {src_img.shape}')
 print(f'ref_img.shape {ref_img.shape}')
 ICOutMax, TCMax = gigicar(src_img.T, ref_img.T)
-
+'''
