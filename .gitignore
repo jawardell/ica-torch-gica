@@ -9,3 +9,4 @@ jobs/
 ica_torch/
 *.npy
 *.nii
+*.dat
