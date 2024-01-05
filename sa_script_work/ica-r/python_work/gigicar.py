@@ -82,7 +82,7 @@ def gigicar(FmriMatr,ICRefMax):
 		wc=(np.matmul(reference, Yinv)).T
 		wc=wc/np.linalg.norm(wc)
 		y1=np.matmul(wc.T, Y)
-		EyrInitial=(1/m)*(y1)*reference.T
+		EyrInitial=(1/m)*(y1)@reference.T
 		NegeInitial=nege(y1)
 		c=(np.tan((EyrInitial*np.pi)/2))/NegeInitial
 		IniObjValue=a*ErChuPai*np.arctan(c*NegeInitial)+b*EyrInitial
@@ -94,26 +94,34 @@ def gigicar(FmriMatr,ICRefMax):
 			logCosy1=np.log(Cosy1)
 			EGy1=np.mean(logCosy1)
 			Negama=EGy1-EGv
-			EYgy=(1/m)*Y*(np.tanh(y1)).T
+			if len(y1.shape) > 1 :
+				if y1.shape[0] > y1.shape[1]:
+					dim = y1.shape[0]
+				else:
+					dim = y1.shape[1]
+			else:
+				dim = y1.shape[0]
+			EYgy=(1/m)*Y@(np.tanh(y1).reshape(1,dim)).T
 			Jy1=(EGy1-EGv)**2
 			KwDaoshu=ErChuPai*c*(1/(1+(c*Jy1)**2))
-			Simgrad=(1/m)*Y*reference.T
-			g=a*KwDaoshu*2*Negama*EYgy+b*Simgrad
+			Simgrad=(1/m)*Y@reference.T
+			g=a*KwDaoshu*2*Negama*EYgy+b*Simgrad.reshape(Simgrad.shape[0],1)
 			logging.info(g.shape)
 			gtg = np.matmul(g.T, g)
-			d=g/(gtg)**0.5
-			wx=wc+Nemda*d
+			d=g/((gtg)**0.5)
+			#d=g@(np.linalg.inv(gtg**0.5))
+			wx=wc.reshape(wc.shape[0],1)+Nemda*d
 			wx=wx/np.linalg.norm(wx)
 			y3=wx.T.dot(Y)
-			PreObjValue=a*ErChuPai*np.arctan(c*nege(y3))+b*(1/m)*y3*reference.T
+			PreObjValue=a*ErChuPai*np.arctan(c*nege(y3))+b*(1/m)*y3@reference.T
 			ObjValueChange=PreObjValue-IniObjValue
 			ftol=0.02
-			dg=g.T*d
+			dg=g.T@d
 			ArmiCondiThr=Nemda*ftol*dg
 			if ObjValueChange<ArmiCondiThr:
 				Nemda=Nemda/2
 				continue
-			if (wc-wx).T*(wc-wx) <1.e-5:
+			if np.all((wc - wx).T @ (wc - wx) < 1.e-5):
 				break
 			elif itertime==iternum:
 				break
@@ -121,9 +129,9 @@ def gigicar(FmriMatr,ICRefMax):
 			y1=y3
 			wc=wx
 			itertime=itertime+1
-		Source=wx.T*Y
+		Source=wx.T@Y
 		ICOutMax[ICnum,:]=Source
-	TCMax=(1/m)*FmriMatr*ICOutMax.T
+	TCMax=(1/m)*FmriMatr@ICOutMax.T
 	return ICOutMax,TCMax
 
 def nege(x):
@@ -167,25 +175,30 @@ logger.addHandler(ch)
 ########################################################################
 # CALL FUNCTIONS
 ########################################################################
-
+'''
 if len(sys.argv) != 6:
     print("Usage: python gigicar.py sub_id func_file out_dir mask_file template_file ")
     print(sys.argv)
     sys.exit()
-
-sub_id = sys.argv[1]
+'''
+#sub_id = sys.argv[1]
+sub_id = '000300655084'
 print(f"sub_id:{sub_id}")
 
-func_file = sys.argv[2]
+#func_file = sys.argv[2]
+func_file = '/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/000300655084/ses_01/processed/func_resampled.nii'
 print(f"func_file:{func_file}")
 
-output_dir = sys.argv[3]
+#output_dir = sys.argv[3]
+output_dir = '/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/000300655084/ses_01/processed'
 print(f"output_dir:{output_dir}")
 
-mask_file = sys.argv[4]
+#mask_file = sys.argv[4]
+mask_file = '/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/group_mean_masks/mask_resampled.nii'
 print(f"mask_file:{mask_file}")
 
-template_file = sys.argv[5]
+#template_file = sys.argv[5]
+template_file = '/data/users2/jwardell1/ica-torch-gica/sa_script_work/gica/group_level_analysis/Neuromark_fMRI_1.0.nii'
 print(f"template_file:{template_file}")
 
 
@@ -219,6 +232,7 @@ ref_data = ref_img.get_fdata()
 print(f'ref_data.shape {ref_data.shape}')
 
 mask_img = nib.load(mask_file)
+mask_data = mask_img.get_fdata()
 idx = np.where(mask_img.dataobj)
 
 #mask source and reference images
@@ -229,6 +243,24 @@ ref_data = ref_data[*idx,:]
 print(f'ref_data.shape {ref_data.shape}')
 
 ICOutMax, TCMax = gigicar(src_data.T, ref_data.T)
+
+# save time courses file
+tcfilename = '{}/{}_TCMax.npy'.format(output_dir, sub_id)
+np.save(tcfilename,TCMax)
+
+
+# reconstruct brain voxels
+xdim, ydim, zdim = mask_data.shape
+n_comp = ICOutMax.shape[0]
+image_stack = np.zeros((xdim, ydim, zdim, n_comp))
+image_stack[*idx,:] = ICOutMax.T
+
+# save as nifti
+nifti_img = nib.Nifti1Image(image_stack, affine=mask_img.get_qform())
+nifti_img.header.set_sform(mask_img.header.get_sform(), code=mask_img.get_qform('code')[1])
+nifti_img.header.set_qform(mask_img.header.get_qform(), code=mask_img.get_qform('code')[1])
+nifti_file = '{}/{}_ICOutMax_py.nii.gz'.format(output_dir, sub_id)
+nib.save(nifti_img, nifti_file)
 
 
 '''

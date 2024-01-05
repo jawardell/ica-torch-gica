@@ -37,11 +37,11 @@ addpath("/trdapps/linux-x86_64/matlab/toolboxes/dicm2nii/")
 % CONVERT NIFTIS TO MATRICES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Parse arguments
-subjectNiftiFile = getenv("inputArg1");
-groupNiftiFile = getenv("inputArg2");
-subid = getenv("inputArg3");
-maskNiftiFile = getenv("inputArg4");
-outputdir = getenv("inputArg5");
+subjectNiftiFile = getenv("FMRI_NIFTI");
+groupNiftiFile = getenv("SM_NIFTI");
+subid = getenv("SUBID");
+maskNiftiFile = getenv("MASK_NIFTI");
+outputdir = getenv("OUTPUT_DIR");
 
 % Display the arguments
 disp(["Subject Nifti File: " subjectNiftiFile]);
