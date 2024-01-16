@@ -44,8 +44,8 @@ def gigicar(FmriMatr,ICRefMax):
 	        numpc=numpc+1
 	logger.info("Performing PCA for %d components" % numpc)
 
-	Epart=Esort[:,1:numpc]
-	dpart=dsort[1:numpc]
+	Epart=Esort[:,:numpc]
+	dpart=dsort[:numpc]
 	Lambda_part=np.diag(dpart)
 	logger.info("Whitening source signal")
 	WhitenMatrix=np.matmul((np.linalg.inv(sqrtm(Lambda_part))), Epart.T)
@@ -183,6 +183,7 @@ if len(sys.argv) != 6:
 '''
 #sub_id = sys.argv[1]
 sub_id = '000300655084'
+sub_id = 'test'
 print(f"sub_id:{sub_id}")
 
 #func_file = sys.argv[2]
@@ -201,7 +202,7 @@ print(f"mask_file:{mask_file}")
 template_file = '/data/users2/jwardell1/ica-torch-gica/sa_script_work/gica/group_level_analysis/Neuromark_fMRI_1.0.nii'
 print(f"template_file:{template_file}")
 
-
+'''
 if not os.path.isfile(func_file):
     print("Error: subject's preprocessed fMRI file not found.")
     sys.exit()
@@ -221,15 +222,21 @@ if not os.path.isfile(template_file):
     print("Error: template file not found.")
     sys.exit()
 
-
-
+'''
+import scipy.io as sio
 src_img = nib.load(func_file)
 src_data = src_img.get_fdata()
-print(f'src_data.shape {src_data.shape}')
+#src_data = np.load('/data/users2/jwardell1/python_debug/sub_mat.npy')
+#src_data_2 = sio.loadmat('/data/users2/jwardell1/python_debug/sub_mat.mat')['sub_mat']
+#print(f'src_data - src_data_2 {src_data - src_data_2}')
 
 ref_img = nib.load(template_file)
 ref_data = ref_img.get_fdata()
-print(f'ref_data.shape {ref_data.shape}')
+#ref_data = '/data/users2/jwardell1/python_debug/group_mat.npy'
+#ref_data = np.load('/data/users2/jwardell1/python_debug/group_mat.npy')
+#ref_data_2 = sio.loadmat('/data/users2/jwardell1/python_debug/group_mat.mat')['group_mat']
+#print(f'ref_data - ref_data_2 {ref_data - ref_data_2}')
+
 
 mask_img = nib.load(mask_file)
 mask_data = mask_img.get_fdata()
@@ -237,6 +244,7 @@ idx = np.where(mask_img.dataobj)
 
 #mask source and reference images
 src_data = src_data[*idx,:]
+#src_data = src_data[mask_data==1]
 print(f'src_data.shape {src_data.shape}')
 
 ref_data = ref_data[*idx,:]

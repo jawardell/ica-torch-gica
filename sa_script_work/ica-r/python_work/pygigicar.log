@@ -930,3 +930,66 @@ INFO:root:(161, 1)
 INFO:root:(161, 1)
 INFO:root:(161, 1)
 INFO:root:(161, 1)
+INFO:pygigicar:
+
+Starting GIGICA at 2024-01-12 23:06:01.184674
+INFO:pygigicar:Reference size (162, 58104)	Signal size (53, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:root:(161, 1)
+INFO:pygigicar:
+
+Starting GIGICA at 2024-01-16 19:18:04.433685
+INFO:pygigicar:Reference size (162, 58104)	Signal size (53, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:Computing negentropy
+INFO:pygigicar:Starting with EGv=0.374567
+INFO:pygigicar:gigicar component: 0/53
+INFO:root:(161, 1)
+INFO:pygigicar:
+
+Starting GIGICA at 2024-01-16 19:20:44.951723
+INFO:pygigicar:Reference size (162, 58104)	Signal size (53, 58104)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 162 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:Done whitening
+INFO:pygigicar:Done projecting
+INFO:pygigicar:Normalizing...
+INFO:pygigicar:Normalizing source signal
+INFO:pygigicar:
+
+Starting GIGICA at 2024-01-16 19:33:29.054762
+INFO:pygigicar:Reference size (162, 58104)	Signal size (53, 58104)
+INFO:pygigicar:
+
+Starting GIGICA at 2024-01-16 22:32:57.000345
+INFO:pygigicar:Reference size (100, 10000)	Signal size (53, 10000)
+INFO:pygigicar:
+
+Starting GIGICA at 2024-01-16 22:34:39.832153
+INFO:pygigicar:Reference size (100, 10000)	Signal size (53, 10000)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 100 components
+INFO:pygigicar:Whitening source signal
+INFO:pygigicar:
+
+Starting GIGICA at 2024-01-16 22:37:43.000285
+INFO:pygigicar:Reference size (100, 10000)	Signal size (53, 10000)
+INFO:pygigicar:Performing PCA reduction on signal
+INFO:pygigicar:Performing PCA for 100 components
+INFO:pygigicar:Whitening source signal
