@@ -18,8 +18,7 @@ export sub_ix=$(( 5*$SLURM_ARRAY_TASK_ID + 3 ))
 export out_ix=$(( 5*$SLURM_ARRAY_TASK_ID + 4 ))
 
 
-#export FMRI_NIFTI=${paths_array[${func_ix}]}
-export FMRI_NIFTI=/data/users2/jwardell1/ica-torch-gica/sa_script_work/gica/group_level_analysis/Neuromark_fMRI_1.0.nii
+export FMRI_NIFTI=${paths_array[${func_ix}]}
 export SM_NIFTI=${paths_array[${sm_ix}]}
 export MASK_NIFTI=${paths_array[${mask_ix}]}
 export SUBID=${paths_array[${sub_ix}]}
