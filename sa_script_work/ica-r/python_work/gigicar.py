@@ -266,7 +266,7 @@ image_stack[*idx,:] = ICOutMax.T
 nifti_img = nib.Nifti1Image(image_stack, affine=mask_img.get_qform())
 nifti_img.header.set_sform(mask_img.header.get_sform(), code=mask_img.get_qform('code')[1])
 nifti_img.header.set_qform(mask_img.header.get_qform(), code=mask_img.get_qform('code')[1])
-nifti_file = '{}/{}_ICOutMax_py3.nii.gz'.format(output_dir, sub_id)
+nifti_file = '{}/{}_ICOutMax_SANITYCHECK_PYTHON.nii.gz'.format(output_dir, sub_id)
 nib.save(nifti_img, nifti_file)
 
 
