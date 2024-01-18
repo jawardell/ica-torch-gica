@@ -37,11 +37,11 @@ addpath("/trdapps/linux-x86_64/matlab/toolboxes/dicm2nii/")
 % CONVERT NIFTIS TO MATRICES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Parse arguments
-subjectNiftiFile = getenv("inputArg1");
-groupNiftiFile = getenv("inputArg2");
-subid = getenv("inputArg3");
-maskNiftiFile = getenv("inputArg4");
-outputdir = getenv("inputArg5");
+subjectNiftiFile = getenv("FMRI_NIFTI");
+groupNiftiFile = getenv("SM_NIFTI");
+subid = getenv("SUBID");
+maskNiftiFile = getenv("MASK_NIFTI");
+outputdir = getenv("OUTPUT_DIR");
 
 % Display the arguments
 disp(["Subject Nifti File: " subjectNiftiFile]);
@@ -129,10 +129,10 @@ disp(size(TCMax))
 
 
 % Save the output matrices to files
-ICFileName = sprintf('%s/ICOutMax_%s.mat', outputdir, subid);
+ICFileName = sprintf('%s/ICOutMax_%s_SANITYCHECK.mat', outputdir, subid);
 save(ICFileName, 'ICOutMax', '-double');
 
-TCFileName = sprintf('%s/TCOutMax_%s.mat', outputdir, subid);
+TCFileName = sprintf('%s/TCOutMax_%s_SANITYCHECK.mat', outputdir, subid);
 save(TCFileName, 'TCMax', '-double');
 
 
@@ -183,7 +183,7 @@ nii.img = img_stack;  % Assuming ICOutMax contains your image data
 nii.hdr = subjectNifti.hdr;
 
 % Save the NIfTI file using nii_tool
-ICFileName = sprintf('%s/ICOutMax_%s.nii', outputdir, subid);
+ICFileName = sprintf('%s/ICOutMax_%s_SANITYCHECK.nii', outputdir, subid);
 nii_tool('save', nii, ICFileName);
 
 

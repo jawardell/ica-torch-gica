@@ -5,7 +5,7 @@ module load matlab
 
 export SLURM_ARRAY_TASK_ID=0
 
-export PATHS_FILE=/data/users2/jwardell1/ica-torch-gica/standalone_gica_script/ica-r/matlab_work/paths
+export PATHS_FILE=/data/users2/jwardell1/ica-torch-gica/sa_script_work/ica-r/matlab_work/datasets/fbirn-project/paths_fbirn
 
 
 
@@ -25,7 +25,7 @@ export SUBID=${paths_array[${sub_ix}]}
 export OUTPUT_DIR=${paths_array[${out_ix}]}
 
 
-export SCRIPT=/data/users2/jwardell1/ica-torch-gica/standalone_gica_script/ica-r/matlab_work/gigicar.m
+export SCRIPT=/data/users2/jwardell1/ica-torch-gica/sa_script_work/ica-r/matlab_work/gigicar.m
 
 #gunzip ${FMRI_NIFTI}.gz
 #matlab -batch "setenv('inputArg1', '${FMRI_NIFTI}'); setenv('inputArg2', '${SM_NIFTI}'); setenv('inputArg3', '${SUBID}'); setenv('inputArg4', '${MASK_NIFTI}'); setenv('inputArg5', '${OUTPUT_DIR}'); run('${SCRIPT}')"
