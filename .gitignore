@@ -10,3 +10,4 @@ ica_torch/
 *.npy
 *.nii
 *.dat
+datasets/
