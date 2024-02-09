@@ -1,44 +1,42 @@
 import torch
-import torch.nn.functional as F
 from torch.linalg import norm
-import sys
-import os
 import nibabel as nib
 import logging
-import datetime
-from scipy.linalg import sqrtm
+
+
+torch.set_default_tensor_type(torch.DoubleTensor)
 
 
 def gigicar(FmriMatr, ICRefMax):
     # Convert numpy arrays to PyTorch tensors
-    FmriMatr = torch.tensor(FmriMatr, dtype=torch.float32)
-    ICRefMax = torch.tensor(ICRefMax, dtype=torch.float32)
+    FmriMatr = torch.tensor(FmriMatr, dtype=torch.float64)
+    ICRefMax = torch.tensor(ICRefMax, dtype=torch.float64)
 
     # Extract dimensions
     n, m = FmriMatr.shape
     n2, m2 = ICRefMax.shape
 
     # Subtract mean from observed data
-    FmriMat = FmriMatr - FmriMatr.mean(dim=1, keepdim=True)
-    print(f'FmriMat.shape {FmriMat.shape}')
-
+    #FmriMat = FmriMatr - FmriMatr.mean(dim=1, keepdim=True)
+    FmriMat=FmriMatr - torch.tile(torch.mean(FmriMatr,1),(m,1)).T
     # Calculate covariance matrix
-    CovFmri = FmriMat @ FmriMat.t() / m
-    print(f'CovFmri.shape {CovFmri.shape}')
-    print(CovFmri.shape)
+    CovFmri = (FmriMat @ FmriMat.t()) / m
 
     # Perform PCA reduction on signal
     D, E = torch.linalg.eig(CovFmri)
-    print(f'D.shape {D.shape}')
-    print(f'E.shape {E.shape}')
 
     #D = D[:, 0].real if len(D.shape) > 1 else D.real  # Extract real parts of eigenvalues
     EsICnum = ICRefMax.shape[0]
     D = D.real
     # Sort eigenvalues and eigenvectors
-    eigenvalues, index = D.sort(descending=True)
-    Esort = E[:, index]
-    dsort = eigenvalues
+    index = D.argsort()
+    eigenvalues = D[index]
+    cols=E.shape[1]
+    Esort=torch.zeros(E.shape)
+    dsort=torch.zeros(eigenvalues.shape)
+    for i in range(cols):
+        Esort[:,i] = E[:,index[cols-i-1] ]
+        dsort[i]   = D[index[cols-i-1] ]
 
 
     thr = 0  # Set your threshold value here
@@ -48,10 +46,10 @@ def gigicar(FmriMatr, ICRefMax):
     Epart = Esort[:, :numpc].real
     dpart = dsort[:numpc]
     Lambda_part = torch.diag(dpart).real
-    print(Epart.t().shape)
-    print(type(Epart.t()))
     # Whitening source signal
-    WhitenMatrix =  torch.linalg.inv(torch.sqrt(Lambda_part)) @ Epart.t()
+    tmp = torch.sqrt(Lambda_part)
+    Lambda_inv = torch.linalg.inv(torch.sqrt(Lambda_part)) 
+    WhitenMatrix = Lambda_inv @ Epart.t()
     Y = WhitenMatrix @ FmriMat
     if thr<1e-10 and numpc<n:
         for i in range(Y.shape[0]):
@@ -111,12 +109,7 @@ def gigicar(FmriMatr, ICRefMax):
             ObjValueChange = PreObjValue - IniObjValue
             ftol = 0.02
             dg = g.t() @ d
-            print(dg.shape)
-            print(g.shape)
-            print(d.shape)
             ArmiCondiThr = Nemda * ftol * dg
-            print(f"ObjValueChange: {ObjValueChange.shape}")
-            print(f'ArmiCondiThr: {ArmiCondiThr.shape}')
             if ObjValueChange < ArmiCondiThr:
                 Nemda = Nemda / 2
                 continue
@@ -174,36 +167,26 @@ logger.addHandler(ch)
 ########################################################################
 # CALL FUNCTIONS
 ########################################################################
-'''
 if len(sys.argv) != 6:
     print("Usage: python gigicar.py sub_id func_file out_dir mask_file template_file ")
     print(sys.argv)
     sys.exit()
-'''
-#sub_id = sys.argv[1]
-sub_id = '000300655084'
-#sub_id = 'test'
+
+sub_id = sys.argv[1]
 print(f"sub_id:{sub_id}")
 
-#func_file = sys.argv[2]
-func_file = '/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/000300655084/ses_01/processed/func_resampled.nii'
+func_file = sys.argv[2]
 print(f"func_file:{func_file}")
 
-#output_dir = sys.argv[3]
-output_dir = '/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/000300655084/ses_01/processed'
+output_dir = sys.argv[3]
 print(f"output_dir:{output_dir}")
 
-#mask_file = sys.argv[4]
-mask_file = '/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/group_mean_masks/mask_resampled.nii'
+mask_file = sys.argv[4]
 print(f"mask_file:{mask_file}")
 
-#template_file = sys.argv[5]
-template_file = '/data/users2/jwardell1/ica-torch-gica/sa_script_work/gica/group_level_analysis/Neuromark_fMRI_1.0.nii'
+template_file = sys.argv[5]
 print(f"template_file:{template_file}")
 
-'''
-if not os.path.isfile(func_file):
-    print("Error: subject's preprocessed fMRI file not found.")
     sys.exit()
 
 
@@ -221,20 +204,19 @@ if not os.path.isfile(template_file):
     print("Error: template file not found.")
     sys.exit()
 
-'''
 
 
 
 
 # Load images
 src_img = nib.load(func_file)
-src_data = torch.tensor(src_img.get_fdata(), dtype=torch.float32)
+src_data = torch.tensor(src_img.get_fdata(), dtype=torch.float64)
 
 ref_img = nib.load(template_file)
-ref_data = torch.tensor(ref_img.get_fdata(), dtype=torch.float32)
+ref_data = torch.tensor(ref_img.get_fdata(), dtype=torch.float64)
 
 mask_img = nib.load(mask_file)
-mask_data = torch.tensor(mask_img.get_fdata(), dtype=torch.float32)
+mask_data = torch.tensor(mask_img.get_fdata(), dtype=torch.float64)
 
 # Create idx tensor
 idx = torch.nonzero(mask_data).t()

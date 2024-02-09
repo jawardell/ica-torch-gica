@@ -10,3 +10,6 @@ ica_torch/
 *.npy
 *.nii
 *.dat
+matlab_work/
+submit.sh
+gigicar.job
