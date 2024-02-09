@@ -175,34 +175,25 @@ logger.addHandler(ch)
 ########################################################################
 # CALL FUNCTIONS
 ########################################################################
-'''
 if len(sys.argv) != 6:
     print("Usage: python gigicar.py sub_id func_file out_dir mask_file template_file ")
     print(sys.argv)
     sys.exit()
-'''
-#sub_id = sys.argv[1]
-sub_id = '000300655084'
-#sub_id = 'test'
+sub_id = sys.argv[1]
 print(f"sub_id:{sub_id}")
 
-#func_file = sys.argv[2]
-func_file = '/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/000300655084/ses_01/processed/func_resampled.nii'
+func_file = sys.argv[2]
 print(f"func_file:{func_file}")
 
-#output_dir = sys.argv[3]
-output_dir = '/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/000300655084/ses_01/processed'
+output_dir = sys.argv[3]
 print(f"output_dir:{output_dir}")
 
-#mask_file = sys.argv[4]
-mask_file = '/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/group_mean_masks/mask_resampled.nii'
+mask_file = sys.argv[4]
 print(f"mask_file:{mask_file}")
 
-#template_file = sys.argv[5]
-template_file = '/data/users2/jwardell1/ica-torch-gica/sa_script_work/gica/group_level_analysis/Neuromark_fMRI_1.0.nii'
+template_file = sys.argv[5]
 print(f"template_file:{template_file}")
 
-'''
 if not os.path.isfile(func_file):
     print("Error: subject's preprocessed fMRI file not found.")
     sys.exit()
@@ -222,21 +213,13 @@ if not os.path.isfile(template_file):
     print("Error: template file not found.")
     sys.exit()
 
-'''
 
 import scipy.io as sio
 src_img = nib.load(func_file)
 src_data = src_img.get_fdata()
-#src_data = np.load('/data/users2/jwardell1/python_debug/sub_mat.npy')
-#src_data_2 = sio.loadmat('/data/users2/jwardell1/python_debug/sub_mat.mat')['sub_mat']
-#print(f'src_data - src_data_2 {src_data - src_data_2}')
 
 ref_img = nib.load(template_file)
 ref_data = ref_img.get_fdata()
-#ref_data = '/data/users2/jwardell1/python_debug/group_mat.npy'
-#ref_data = np.load('/data/users2/jwardell1/python_debug/group_mat.npy')
-#ref_data_2 = sio.loadmat('/data/users2/jwardell1/python_debug/group_mat.mat')['group_mat']
-#print(f'ref_data - ref_data_2 {ref_data - ref_data_2}')
 
 mask_img = nib.load(mask_file)
 mask_data = mask_img.get_fdata()
