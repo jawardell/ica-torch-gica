@@ -2,15 +2,17 @@ import torch
 from torch.linalg import norm
 import nibabel as nib
 import logging
+import torch.cuda as cuda   #add for GPU support
 
 
 torch.set_default_tensor_type(torch.DoubleTensor)
 
 
-def gigicar(FmriMatr, ICRefMax):
+
+def gigicar(FmriMatr, ICRefMax, device):
     # Convert numpy arrays to PyTorch tensors
-    FmriMatr = torch.tensor(FmriMatr, dtype=torch.float64)
-    ICRefMax = torch.tensor(ICRefMax, dtype=torch.float64)
+    FmriMatr = torch.tensor(FmriMatr, dtype=torch.float64, device=device)
+    ICRefMax = torch.tensor(ICRefMax, dtype=torch.float64, device=device)
 
     # Extract dimensions
     n, m = FmriMatr.shape
@@ -206,17 +208,18 @@ if not os.path.isfile(template_file):
 
 
 
+device = cuda.current_device() if cuda.is_available() else torch.device('cpu') # use gpu if available
 
 
 # Load images
 src_img = nib.load(func_file)
-src_data = torch.tensor(src_img.get_fdata(), dtype=torch.float64)
+src_data = torch.tensor(src_img.get_fdata(), dtype=torch.float64, device=device)
 
 ref_img = nib.load(template_file)
-ref_data = torch.tensor(ref_img.get_fdata(), dtype=torch.float64)
+ref_data = torch.tensor(ref_img.get_fdata(), dtype=torch.float64, device=device)
 
 mask_img = nib.load(mask_file)
-mask_data = torch.tensor(mask_img.get_fdata(), dtype=torch.float64)
+mask_data = torch.tensor(mask_img.get_fdata(), dtype=torch.float64, device=device)
 
 # Create idx tensor
 idx = torch.nonzero(mask_data).t()
@@ -232,7 +235,7 @@ print(f'ref_data.shape {ref_data.shape}')
 idx_np = idx.cpu().numpy()
 
 # Continue with the rest of your PyTorch code...
-ICOutMax, TCMax = gigicar(src_data, ref_data)
+ICOutMax, TCMax = gigicar(src_data, ref_data, device)
 
 
 import numpy as np
