@@ -32,7 +32,7 @@ def joint_loss(sources, mag_norm, reference, m, a, b):
 torch.set_default_tensor_type(torch.DoubleTensor)
 
 
-class GIGICA(torch.nn.Module):
+class gigICA(torch.nn.Module):
     #init_sources = y1, init_weights = 2c, mag_norm = c, m = m
     def __init__(self, init_weights,  mag_norm, m):
         super().__init__()

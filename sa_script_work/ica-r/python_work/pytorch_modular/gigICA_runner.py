@@ -1,6 +1,6 @@
 import torch 
 import numpy as np
-from GIGICA import joint_loss, GIGICA
+from gigICA import joint_loss, gigICA
 from torch.nn.utils import weight_norm as wn
 from torch.linalg import norm
 import nibabel as nib
@@ -13,7 +13,7 @@ ErChuPai = 2 / 3.141592653589793
 
 
 
-def gigicar(FmriMatr, ICRefMax):
+def gigicar(FmriMatr, ICRefMax, a = .8, iternum = 100, Nemda = .001):
     # Convert numpy arrays to PyTorch tensors
     FmriMatr = torch.tensor(FmriMatr, dtype=torch.float64)
     ICRefMax = torch.tensor(ICRefMax, dtype=torch.float64)
@@ -68,8 +68,7 @@ def gigicar(FmriMatr, ICRefMax):
     for i in range(EsICnum):
         ICRefMaxN[i,:]=ICRefMaxC[i,:]/torch.std(ICRefMaxC[i,:])
     #ICRefMaxN = (ICRefMax - ICRefMax.mean(dim=1, keepdim=True)) / ICRefMax.std(dim=1, keepdim=True)
-    iternum = 100
-    a = 0.8
+    
     b = 1 - a
     ICOutMax = torch.zeros((EsICnum, m))
     gradients = []
@@ -83,8 +82,8 @@ def gigicar(FmriMatr, ICRefMax):
         NegeInitial = nege(last_sources)
         mag_norm = (torch.tan((EyrInitial * 3.141592653589793) / 2)) / NegeInitial
         itertime = 1
-        Nemda = .001
-        GICA = GIGICA(wc,mag_norm,m)
+        
+        GICA = gigICA(wc,mag_norm,m)
         
         
         optimizer = torch.optim.SGD(GICA.parameters(), lr=Nemda)
@@ -100,9 +99,7 @@ def gigicar(FmriMatr, ICRefMax):
             itertime = itertime + 1
         wx = GICA.W.state_dict()['weight']
         Source = wx @ Y
-        gradients.append(np.array(grrs))
         ICOutMax[ICnum, :] = Source.squeeze()
-    np.save(f'{output_dir}/{sub_id}_grads.npy',np.array(gradients))
     TCMax = (1 / m) * FmriMatr @ ICOutMax.t()
     return ICOutMax, TCMax
 
@@ -133,7 +130,7 @@ func_file = '/data/qneuromark/Data/FBIRN/ZN_Neuromark/ZN_Prep_fMRI/'+sub_id+'/SM
 print(f"func_file:{func_file}")
 
 #output_dir = sys.argv[3]
-output_dir = './out/'
+output_dir = './out'
 print(f"output_dir:{output_dir}")
 
 #mask_file = sys.argv[4]
