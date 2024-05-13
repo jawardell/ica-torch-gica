@@ -7,9 +7,10 @@ else
 	export SLURM_ARRAY_TASK_ID=$1
 fi
 
-export PATHS_FILE=/data/users2/jwardell1/ica-torch-gica/sa_script_work/ica-r/matlab_work/datasets/fbirn-project/paths_fbirn
+export PATHS_FILE=/data/users2/jwardell1/ica-torch-gica/sa_script_work/ica-r/matlab_work/datasets/ds001747-project/paths_ds001747
 
 
+module load matlab
 
 IFS=$'\n'
 export paths_array=($(cat ${PATHS_FILE}))
@@ -42,8 +43,6 @@ echo "OUTPUT_DIR: $OUTPUT_DIR"
 
 export SCRIPT=/data/users2/jwardell1/ica-torch-gica/sa_script_work/ica-r/matlab_work/gigicar.m
 
-#gunzip ${FMRI_NIFTI}.gz
 
 #matlab -batch "setenv('inputArg1', '${FMRI_NIFTI}'); setenv('inputArg2', '${SM_NIFTI}'); setenv('inputArg3', '${SUBID}'); setenv('inputArg4', '${MASK_NIFTI}'); setenv('inputArg5', '${OUTPUT_DIR}'); run('${SCRIPT}')"
 
-#gzip ${FMRI_NIFTI}

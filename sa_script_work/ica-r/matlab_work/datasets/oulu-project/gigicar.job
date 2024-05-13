@@ -1,25 +1,25 @@
 #!/bin/bash
-#!/bin/bash
 #SBATCH -n 1
 #SBATCH -c 4
 #SBATCH --mem=64G
 #SBATCH -p qTRD
 #SBATCH --time=20:00:00
 #SBATCH -J icar
-#SBATCH -e ./jobs/error%A.err
-#SBATCH -o ./jobs/out%A.out
+#SBATCH -e ./jobs/error%A_%a.err
+#SBATCH -o ./jobs/out%A_%a.out
 #SBATCH -A psy53c17
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=jwardell1@student.gsu.edu
 #SBATCH --oversubscribe
+
 module load matlab
+module load fsl
+module load afni
 
+PATHS_FILE=/data/users2/jwardell1/ica-torch-gica/sa_script_work/ica-r/matlab_work/datasets/oulu-project/paths_oulu
 
-#SLURM_ARRAY_TASK_ID=0
-
-PATHS_FILE=/data/users2/jwardell1/ica-torch-gica/sa_script_work/ica-r/matlab_work/datasets/DATASETNAME-project/paths_DATASETNAME
-
-
+echo "$SLURM_ARRAY_TASK_ID"
+echo `hostname`
 
 IFS=$'\n'
 paths_array=($(cat ${PATHS_FILE}))
@@ -30,11 +30,20 @@ sub_ix=$(( 5*$SLURM_ARRAY_TASK_ID + 3 ))
 out_ix=$(( 5*$SLURM_ARRAY_TASK_ID + 4 ))
 
 
-FMRI_NIFTI=${paths_array[${func_ix}]}
-SM_NIFTI=${paths_array[${sm_ix}]}
-MASK_NIFTI=${paths_array[${mask_ix}]}
-SUBID=${paths_array[${sub_ix}]}
-OUTPUT_DIR=${paths_array[${out_ix}]}
+export FMRI_NIFTI=${paths_array[${func_ix}]}
+echo "FMRI_NIFTI: $FMRI_NIFTI"
+
+export SM_NIFTI=${paths_array[${sm_ix}]}
+echo "SM_NIFTI: $SM_NIFTI"
+
+export MASK_NIFTI=${paths_array[${mask_ix}]}
+echo "MASK_NIFTI: $MASK_NIFTI"
+
+export SUBID=${paths_array[${sub_ix}]}
+echo "SUBID: $SUBID"
+
+export OUTPUT_DIR=${paths_array[${out_ix}]}
+echo "OUTPUT_DIR: $OUTPUT_DIR"
 
 
 SCRIPT=/data/users2/jwardell1/ica-torch-gica/sa_script_work/ica-r/matlab_work/gigicar.m
@@ -65,9 +74,9 @@ mask_ydim=$(echo "$mask_header" | grep -w "dim2" | awk '{print $2}')
 mask_zdim=$(echo "$mask_header" | grep -w "dim3" | awk '{print $2}')
 
 sm_header=$(fslhd $SM_NIFTI)
-sm_xdim=$(echo "$mask_header" | grep -w "dim1" | awk '{print $2}')
-sm_ydim=$(echo "$mask_header" | grep -w "dim2" | awk '{print $2}')
-sm_zdim=$(echo "$mask_header" | grep -w "dim3" | awk '{print $2}')
+sm_xdim=$(echo "$sm_header" | grep -w "dim1" | awk '{print $2}')
+sm_ydim=$(echo "$sm_header" | grep -w "dim2" | awk '{print $2}')
+sm_zdim=$(echo "$sm_header" | grep -w "dim3" | awk '{print $2}')
 
 if [ "$mask_xdim" -eq "$sm_xdim" ] && [ "$mask_ydim" -eq "$sm_ydim" ] && [ "$mask_zdim" -eq "$sm_zdim" ]; then
     echo "Mask dimensions match reference nifti."
@@ -78,8 +87,8 @@ else
     mfilename=`basename $noextpath`
     currdir=`pwd`
     cd $maskdir
-    if [ -f ${ffilename}_resampled.nii ]; then 
-	rm ${ffilename}_resampled.nii
+    if [ -f ${mfilename}_resampled.nii ]; then 
+	rm ${mfilename}_resampled.nii
     fi
     3dresample -master $SM_NIFTI -prefix ${mfilename}_resampled.nii -input $MASK_NIFTI
     MASK_NIFTI=`pwd`/${mfilename}_resampled.nii
@@ -125,8 +134,9 @@ else
 fi
 
 
-#matlab -batch "setenv('inputArg1', '${FMRI_NIFTI}'); setenv('inputArg2', '${SM_NIFTI}'); setenv('inputArg3', '${SUBID}'); setenv('inputArg4', '${MASK_NIFTI}'); setenv('inputArg5', '${OUTPUT_DIR}'); run('${SCRIPT}')"
-matlab -batch $SCRIPT
+matlab -batch "run('${SCRIPT}')"
+matlabPID=$!
+wait $matlabPID
 
 if [[ $OG_FNAME =~ \.nii$ ]];then
 	echo "gzipping fmri nifti"

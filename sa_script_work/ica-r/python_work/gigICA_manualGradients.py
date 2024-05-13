@@ -1,13 +1,7 @@
 import torch
-
-import torch.nn.functional as F
 from torch.linalg import norm
-import sys
-import os
 import nibabel as nib
-import logging
-import datetime
-from scipy.linalg import sqrtm
+import numpy as np
 
 
 torch.set_default_tensor_type(torch.DoubleTensor)
@@ -23,6 +17,7 @@ def gigicar(FmriMatr, ICRefMax):
     n2, m2 = ICRefMax.shape
 
     # Subtract mean from observed data
+    #FmriMat = FmriMatr - FmriMatr.mean(dim=1, keepdim=True)
     FmriMat=FmriMatr - torch.tile(torch.mean(FmriMatr,1),(m,1)).T
     # Calculate covariance matrix
     CovFmri = (FmriMat @ FmriMat.t()) / m
@@ -30,6 +25,7 @@ def gigicar(FmriMatr, ICRefMax):
     # Perform PCA reduction on signal
     D, E = torch.linalg.eig(CovFmri)
 
+    #D = D[:, 0].real if len(D.shape) > 1 else D.real  # Extract real parts of eigenvalues
     EsICnum = ICRefMax.shape[0]
     D = D.real
     # Sort eigenvalues and eigenvectors
@@ -47,9 +43,9 @@ def gigicar(FmriMatr, ICRefMax):
     numpc = (dsort > thr).sum()
 
     # Perform PCA for selected components
-    Epart = Esort[:, :numpc].real
+    Epart = Esort[:, :numpc]#.real
     dpart = dsort[:numpc]
-    Lambda_part = torch.diag(dpart).real
+    Lambda_part = torch.diag(dpart)#.real
     # Whitening source signal
     tmp = torch.sqrt(Lambda_part)
     Lambda_inv = torch.linalg.inv(torch.sqrt(Lambda_part)) 
@@ -72,27 +68,33 @@ def gigicar(FmriMatr, ICRefMax):
     for i in range(EsICnum):
         NegeEva[i] = nege(ICRefMaxN[i, :])
 
-    iternum = 10
-    a = 0.5
+    iternum = 100
+    a = 0.8
     b = 1 - a
     EGv = 0.3745672075
     ErChuPai = 2 / 3.141592653589793
-
+    ICInit = torch.zeros((EsICnum, m))
     ICOutMax = torch.zeros((EsICnum, m))
-    logger.info("Starting with EGv=%f" % EGv)
-    for ICnum in range(EsICnum):
-        logger.info('gigicar component: %d/%d' % (ICnum, EsICnum))
+    gradients = []
+    for ICnum in range(1):
         reference = ICRefMaxN[ICnum, :]
         wc = (reference @ torch.linalg.pinv(Y)).t()
         wc = wc / norm(wc)
+        print("wc")
+        print(torch.mean(wc))
         y1 = wc.t() @ Y
         EyrInitial = (1 / m) * (y1) @ reference.t()
         NegeInitial = nege(y1)
         c = (torch.tan((EyrInitial * 3.141592653589793) / 2)) / NegeInitial
+        print(torch.mean(y1))
+        print(c)
         IniObjValue = a * ErChuPai * torch.arctan(c * NegeInitial) + b * EyrInitial
 
         itertime = 1
-        Nemda = 1
+        Nemda = .001
+        ICInit[ICnum,:] =  wc.t() @ Y
+        grrs = []
+        losses = []
         for i in range(iternum):
             Cosy1 = torch.cosh(y1)
             logCosy1 = torch.log(Cosy1)
@@ -103,21 +105,31 @@ def gigicar(FmriMatr, ICRefMax):
             Jy1 = (EGy1 - EGv)**2
             KwDaoshu = ErChuPai * c * (1 / (1 + (c * Jy1)**2))
             Simgrad = (1 / m) * Y @ reference.t()
+            
             g = a * KwDaoshu * 2 * Negama * EYgy + b * Simgrad#.view(Simgrad.shape[0], 1)
             g_norm = torch.sqrt(g.T@g)#torch.linalg.norm(g)
-            d = g / g_norm
+            d = g #/ g_norm
+            grrs.append(d.cpu().numpy())
             wx = wc + Nemda * d #wc.view(wc.shape[0], 1)
             wx = wx / norm(wx)
             y3 = wx.t() @ Y
             PreObjValue = a * ErChuPai * torch.arctan(c * nege(y3)) + b * (1 / m) * y3 @ reference.t()
+            curLoss = a * ErChuPai * torch.arctan(c * nege(y1)) + b * (1 / m) * y1 @ reference.t()
+            losses.append(np.array([(ErChuPai * torch.arctan(c * nege(y1))).numpy(), ((1 / m) * y1 @ reference.t()).numpy()]))
+            print("loss ",i)
+            print(ErChuPai * torch.arctan(c * nege(y1)))
+            print( (1 / m) * y1 @ reference.t())
+            print(PreObjValue)
             ObjValueChange = PreObjValue - IniObjValue
             ftol = 0.02
             dg = g.t() @ d
             ArmiCondiThr = Nemda * ftol * dg
             if ObjValueChange < ArmiCondiThr:
-                Nemda = Nemda / 2
-                continue
+                #print("asdf")
+                Nemda = Nemda #/ 2
+                #continue
             if torch.allclose(wc.t() @ wx, torch.zeros(1), atol=1e-5):
+                print("break")
                 break
             elif itertime == iternum:
                 break
@@ -125,11 +137,24 @@ def gigicar(FmriMatr, ICRefMax):
             y1 = y3
             wc = wx
             itertime = itertime + 1
-
         Source = wx.t() @ Y
+        np.save("losses",losses)
         ICOutMax[ICnum, :] = Source
+        idx_np = idx.cpu().numpy()
+        gradients.append(np.array(grrs))
+    xdim, ydim, zdim = mask_data.shape
+    n_comp = ICInit.shape[0]
+    image_stack = torch.zeros((xdim, ydim, zdim, n_comp))
+    image_stack[idx_np[0], idx_np[1], idx_np[2], :] = ICInit.t()
 
+    # Save as nifti
+    nifti_img = nib.Nifti1Image(image_stack.numpy(), affine=mask_img.get_qform())
+    nifti_img.header.set_sform(mask_img.header.get_sform(), code=mask_img.get_qform('code')[1])
+    nifti_img.header.set_qform(mask_img.header.get_qform(), code=mask_img.get_qform('code')[1])
+    nifti_file = f'{output_dir}/{sub_id}_ICOutMax_PyTorch_init.nii.gz'
+    nib.save(nifti_img, nifti_file)
     TCMax = (1 / m) * FmriMatr @ ICOutMax.t()
+    np.save(f'{output_dir}/{sub_id}_grads_notTorch.npy',np.array(gradients))
     return ICOutMax, TCMax
 
 
@@ -141,56 +166,36 @@ def nege(x):
 
 
 ########################################################################
-# SETUP LOGGER
-########################################################################
-
-
-
-DEFAULT_REFERENCE_FN = 'pooled_47.nii'
-DEFAULT_EXAMPLE_FN = 'example.nii'
-FORMAT = '%(asctime)-15s %(message)s'
-logging.basicConfig(filename='pygigicar.log',level=logging.INFO)
-logging.basicConfig(format=FORMAT)
-ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
-
-# create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-# add formatter to ch
-ch.setFormatter(formatter)
-
-
-logger = logging.getLogger('pygigicar')
-logger.setLevel(logging.INFO)
-# add ch to logger
-logger.handlers = []
-logger.addHandler(ch)
-
-
-########################################################################
 # CALL FUNCTIONS
 ########################################################################
+'''
 if len(sys.argv) != 6:
     print("Usage: python gigicar.py sub_id func_file out_dir mask_file template_file ")
     print(sys.argv)
     sys.exit()
-
-sub_id = sys.argv[1]
+'''
+#sub_id = sys.argv[1]
+sub_id = "001312269620"
+#sub_id = 'test'
 print(f"sub_id:{sub_id}")
 
-func_file = sys.argv[2]
+#func_file = sys.argv[2]
+func_file = '/data/qneuromark/Data/FBIRN/ZN_Neuromark/ZN_Prep_fMRI/'+sub_id+'/SM.nii'
 print(f"func_file:{func_file}")
 
-output_dir = sys.argv[3]
+#output_dir = sys.argv[3]
+output_dir = './out/'
 print(f"output_dir:{output_dir}")
 
-mask_file = sys.argv[4]
+#mask_file = sys.argv[4]
+mask_file = '/data/users2/jwardell1/nshor_docker/examples/fbirn-project/FBIRN/group_mean_masks/mask_resampled.nii'
 print(f"mask_file:{mask_file}")
 
-template_file = sys.argv[5]
+#template_file = sys.argv[5]
+template_file = '/data/users2/jwardell1/ica-torch-gica/sa_script_work/gica/group_level_analysis/Neuromark_fMRI_1.0.nii'
 print(f"template_file:{template_file}")
 
+'''
 if not os.path.isfile(func_file):
     print("Error: subject's preprocessed fMRI file not found.")
     sys.exit()
@@ -210,6 +215,7 @@ if not os.path.isfile(template_file):
     print("Error: template file not found.")
     sys.exit()
 
+'''
 
 
 
@@ -241,7 +247,6 @@ idx_np = idx.cpu().numpy()
 ICOutMax, TCMax = gigicar(src_data, ref_data)
 
 
-import numpy as np
 TCMax = TCMax.cpu().numpy()
 # Save time courses file
 tcfilename = f'{output_dir}/{sub_id}_TCMax_PyTorch.npy'
@@ -261,5 +266,6 @@ image_stack[idx_np[0], idx_np[1], idx_np[2], :] = ICOutMax.t()
 nifti_img = nib.Nifti1Image(image_stack.numpy(), affine=mask_img.get_qform())
 nifti_img.header.set_sform(mask_img.header.get_sform(), code=mask_img.get_qform('code')[1])
 nifti_img.header.set_qform(mask_img.header.get_qform(), code=mask_img.get_qform('code')[1])
-nifti_file = f'{output_dir}/{sub_id}_ICOutMax_PyTorch.nii.gz'
+nifti_file = f'{output_dir}/{sub_id}_ICOutMax_PyTorch_100I.nii.gz'
+print(nifti_file)
 nib.save(nifti_img, nifti_file)

@@ -44,9 +44,9 @@ def gigicar(FmriMatr,ICRefMax):
 	        numpc=numpc+1
 	logger.info("Performing PCA for %d components" % numpc)
 
-	Epart=Esort[:,:numpc]
-	dpart=dsort[:numpc]
-	Lambda_part=np.diag(dpart)
+	Epart=Esort[:,:numpc].real
+	dpart=dsort[:numpc].real
+	Lambda_part=np.diag(dpart).real
 	logger.info("Whitening source signal")
 	WhitenMatrix=np.matmul((np.linalg.inv(sqrtm(Lambda_part))), Epart.T)
 	logger.info("Done whitening")
@@ -253,31 +253,3 @@ nifti_file = '{}/{}_ICOutMax_SANITYCHECK_PYTHON.nii.gz'.format(output_dir, sub_i
 nib.save(nifti_img, nifti_file)
 
 
-'''
-import scipy.io as sio
-
-
-
-
-mask = sio.loadmat('mask.mat')['mask'].flatten()
-ref_img = nib.load(template_file)
-ref_img = np.array(ref_img.dataobj)
-print(f'ref_img.shape {ref_img.shape}')
-ref_img = ref_img.reshape(np.prod(ref_img.shape[0:3]), ref_img.shape[3])
-
-
-print(f'template_file {template_file}')
-ref_img = mask_img(ref_img, mask)
-src_img = nib.load(func_file)
-
-
-print(f'func_file {func_file}')
-src_img = np.array(src_img.dataobj)
-src_img = src_img.reshape(np.prod(src_img.shape[0:3]), src_img.shape[3])
-print(f'src_img.shape {src_img.shape}')
-
-src_img = mask_img(src_img, mask)
-print(f'src_img.shape {src_img.shape}')
-print(f'ref_img.shape {ref_img.shape}')
-ICOutMax, TCMax = gigicar(src_img.T, ref_img.T)
-'''

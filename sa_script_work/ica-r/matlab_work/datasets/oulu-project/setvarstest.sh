@@ -7,7 +7,7 @@ else
 	export SLURM_ARRAY_TASK_ID=$1
 fi
 
-export PATHS_FILE=/data/users2/jwardell1/ica-torch-gica/sa_script_work/ica-r/matlab_work/datasets/fbirn-project/paths_fbirn
+export PATHS_FILE=/data/users2/jwardell1/ica-torch-gica/sa_script_work/ica-r/matlab_work/datasets/oulu-project/paths_oulu
 
 
 

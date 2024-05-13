@@ -1,7 +1,7 @@
 #!/bin/bash
 
-project_dir=/data/users2/jwardell1/ica-torch-gica/sa_script_work/ica-r/matlab_work
-paths_file=${project_dir}/datasets/DATASETNAME-project/paths_DATASETNAME
+project_dir=/data/users2/jwardell1/ica-torch-gica/standalone_gica_script/ica-r/matlab_work/datasets/fbirn-project
+paths_file=${project_dir}/paths_fbirn
 
 num_lines=`wc -l <  $paths_file`
 num_total_runs=$(( $num_lines / 5 ))
